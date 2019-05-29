@@ -1,6 +1,23 @@
 ## Work agreements / Code of Conduct / Work in progress
 
 
+## Team
+`Owner` 
+- Mark Kravchuk(460888), email: 460888@student.saxion.nl
+
+`Scrum master Sp1` TBD
+
+`Scrum master Sp2` TBD
+
+`Developers`
+- Michael Cornelisse(459466), email: 459466@student.saxion.nl
+- Eleazu Onyebuchi .I.(469962), email: 469962@student.saxion.nl
+- Adomas Aleksandravicius(), email:
+- Jokūbas Tumasonis (467252), email: 467252@student.saxion.nl
+
+### Work hours per week
+Minimum expected hours of work per group member a week (8 to 12 hours)
+
 ### Communication
 Communicate how you are doing, if you are having problems, need help or just anything, just don’t keep it to yourself.
 
