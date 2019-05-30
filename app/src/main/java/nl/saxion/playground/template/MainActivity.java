@@ -11,6 +11,7 @@ import nl.saxion.playground.template.spaceshooter.Game;
 import nl.saxion.playground.template.spaceshooter.Activity;
 
 public class MainActivity extends AppCompatActivity {
+    // this is a test
 
     GameView spaceShooterCanvas, platformerCanvas;
     GameModel spaceShooter, platformer;
