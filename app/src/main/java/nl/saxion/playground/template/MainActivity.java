@@ -7,37 +7,27 @@ import android.view.View;
 
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lib.GameModel;
-import nl.saxion.playground.template.spaceshooter.Game;
-import nl.saxion.playground.template.spaceshooter.Activity;
+import nl.saxion.playground.template.lumberjack_simulator.Activity;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 
 public class MainActivity extends AppCompatActivity {
     // this is a test
 
-    GameView spaceShooterCanvas, platformerCanvas;
-    GameModel spaceShooter, platformer;
+    GameView lumberjackSimulatorCanvas;
+    GameModel lumberjackSimulator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spaceShooterCanvas = findViewById(R.id.spaceShooter);
-        spaceShooter = new Game();
+        lumberjackSimulatorCanvas = findViewById(R.id.lumberjackSimulator);
+        lumberjackSimulator = new Game();
 
-        findViewById(R.id.spaceShooterText).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.lumberjackText).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Activity.class));
-            }
-        });
-
-        platformerCanvas = findViewById(R.id.platformer);
-        platformer = new nl.saxion.playground.template.platformer.Game();
-
-        findViewById(R.id.platformerText).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, nl.saxion.playground.template.platformer.Activity.class));
             }
         });
     }
@@ -45,14 +35,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        spaceShooterCanvas.setGame(spaceShooter);
-        platformerCanvas.setGame(platformer);
+        lumberjackSimulatorCanvas.setGame(lumberjackSimulator);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        spaceShooterCanvas.setGame(null);
-        platformerCanvas.setGame(null);
+        lumberjackSimulatorCanvas.setGame(null);
     }
 }
