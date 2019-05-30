@@ -5,14 +5,15 @@
 `Owner` 
 - Mark Kravchuk(460888), email: 460888@student.saxion.nl
 
-`Scrum master Sp1` TBD
+`Scrum master Sp1` 
+
+-  Michael Cornelisse(459466), email: 459466@student.saxion.nl
 
 `Scrum master Sp2` TBD
 
 `Developers`
-- Michael Cornelisse(459466), email: 459466@student.saxion.nl
 - Eleazu Onyebuchi .I.(469962), email: 469962@student.saxion.nl
-- Adomas Aleksandravicius(), email:
+- Adomas Aleksandravicius(470103), email: 470103@student.saxion.nl
 - Jokūbas Tumasonis (467252), email: 467252@student.saxion.nl
 
 ### Work hours per week
