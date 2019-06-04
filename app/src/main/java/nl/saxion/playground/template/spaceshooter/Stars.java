@@ -18,11 +18,9 @@ public class Stars extends Entity {
 
     private Game game;
 
-
     Stars(Game game) {
         this.game = game;
     }
-
 
     @Override
     public void tick() {

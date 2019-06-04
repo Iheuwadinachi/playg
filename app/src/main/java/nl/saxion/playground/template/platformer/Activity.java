@@ -22,7 +22,6 @@ public class Activity extends AppCompatActivity implements Game.Listener {
         setContentView(R.layout.activity_platformer);
 
         gameView = findViewById(R.id.gameView);
-        scrollText = findViewById(R.id.scrollText);
 
         // If a running game has been serialized (because it has been paused for
         // a long time, or because of an orientation change), recreate the Game

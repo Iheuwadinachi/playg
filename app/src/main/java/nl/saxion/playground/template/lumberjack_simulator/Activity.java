@@ -5,23 +5,26 @@ import android.os.Bundle;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
-import nl.saxion.playground.template.platformer.Game;
 
 public class Activity extends AppCompatActivity {
 
-    private Game game;
-    private GameView gameView;
+    Game game;
+    GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_);
+
+        // In this example, we don't require a Layout or any other Android Views than
+        // are custom GameCanvas.
         gameView = new GameView(this);
         setContentView(gameView);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey("game")) {
-            game = (Game) savedInstanceState.getSerializable("game");
+        // If a running game has been serialized (because it has been paused for
+        // a long time, or because of an orientation change), recreate the Game
+        // object from the serialized bundle.
+        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
+            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.getSerializable("game");
         } else {
             game = new Game();
         }

@@ -12,11 +12,9 @@ public class Background extends Entity {
 
     private Game game;
 
-
     Background(Game game) {
         this.game = game;
     }
-
 
     @Override
     public void draw(GameView gv) {
