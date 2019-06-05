@@ -24,11 +24,6 @@ public class TreeGenerator extends Entity {
 
     private boolean addNewTreeElement;
 
-    //private Thread animationFallingLogs;
-
-    //testing
-
-
     private Game game;
 
     public TreeGenerator(Game game){
@@ -54,72 +49,25 @@ public class TreeGenerator extends Entity {
             y -= logSize;
         }
 
-//        animationFallingLogs = new Thread(){
-//            @Override
-//            public void run() {
-//                try{
-//                    for (TreeElement element: logs) {
-//                        for (int i =0; i < 4; i++){
-//                            element.position.y += 5f;
-//                            sleep(ANIMATION_TIME);
-//                        }
-//                    }
-//                } catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                finally {
-//                    addNewTreeElement = true;
-//                    tick();
-//                }
-//            }
-//        };
     }
 
     @Override
     public void tick() {
-        if(game.treeChopped){
+        if(game.treeChopped[0]){
             logs.remove();
-            game.treeChopped = false;
-            //animationFallingLogs.start();
-        }
-        if(addNewTreeElement) {
-            //animationFallingLogs.interrupt();
+            game.treeChopped[0] = false;
+
             int counter = 0;
             for (TreeElement element : logs) {
                 Log.i("extra_info", counter + ") X: " + element.position.x + ", Y:" + element.position.y);
+                moveLogDown(counter);
                 counter++;
             }
             TreeElement element = new TreeElement(game);
             element.position.x = 35f;
             element.position.y = 10f;
             logs.add(element);
-            addNewTreeElement = false;
         }
-        if(logs.size() <= 4){
-            if(tickRate % 10 == 0){
-                moveLogDown(logIndex);
-                Log.i("extra_info","Moving log # " + logIndex + ") ");
-                logIndex++;
-            }
-            if(logIndex >= logs.size()){
-
-
-                int counter = 0;
-                for (TreeElement element : logs){
-                    Log.i("extra_info",counter + ") X: " + element.position.x + ", Y:" + element.position.y);
-                    counter++;
-                }
-
-
-                TreeElement element = new TreeElement(game);
-                element.position.x = 35f;
-                element.position.y = 10f;
-                logs.add(element);
-                Log.i("extra_info","Index > max result, new element added");
-                logIndex = 0;
-            }
-        }
-
 
         tickRate++;
     }
@@ -147,6 +95,5 @@ public class TreeGenerator extends Entity {
         bottomBlock.position.x = 35f;
         bottomBlock.position.y = 110f;
         bottomBlock.draw(gv);
-
     }
 }

@@ -17,17 +17,6 @@ public class Background extends Entity {
         this.game = game;
     }
 
-    /*
-      @Override
-    public void draw(GameView gv) {
-        if (bitmap==null) bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
-
-        gv.getCanvas().drawColor(Color.rgb(219,228,238));
-
-    }
-
-     */
-
     public void draw(GameView gv){
         if (bitmap==null){
             bitmap = gv.getBitmapFromResource(R.drawable.landscape1);

@@ -6,18 +6,27 @@ import nl.saxion.playground.template.lib.GameModel;
 
 public class Game extends GameModel {
 
-    boolean treeChopped;
+    boolean[] treeChopped;
+    int coinsEarned;
+
+    Activity thatActivity;
 
     @Override
     public void start() {
 
+        treeChopped = new boolean[2];
+
         addEntity(new Background(this));
-        //addEntity(new Tree(this));
         addEntity(new TreeGenerator(this));
+        addEntity(new MoneyGenerator(this));
         addEntity(new Lumberjack(this));
         Log.i("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }
 
+    void updateTextView(){
+        coinsEarned++;
+        if(thatActivity != null) thatActivity.coinIndicator.setText("Coins: " + coinsEarned);
+    }
 
     @Override
     public float getWidth() {

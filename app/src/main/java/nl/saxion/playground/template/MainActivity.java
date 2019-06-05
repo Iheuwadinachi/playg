@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(MainActivity.this, nl.saxion.playground.template.lumberjack_simulator.Activity.class));
 
-        //platformer = new nl.saxion.playground.template.platformer.Game();
+        platformer = new nl.saxion.playground.template.platformer.Game();
 
 //        TextView lumberjackTV = findViewById(R.id.platformerText);
 //        lumberjackTV.setText("LUMBERJACK !!!");
