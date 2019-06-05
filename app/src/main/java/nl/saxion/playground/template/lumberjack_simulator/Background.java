@@ -17,11 +17,25 @@ public class Background extends Entity {
         this.game = game;
     }
 
-    @Override
+    /*
+      @Override
     public void draw(GameView gv) {
         if (bitmap==null) bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
 
         gv.getCanvas().drawColor(Color.rgb(219,228,238));
 
+    }
+
+     */
+
+    public void draw(GameView gv){
+        if (bitmap==null){
+            bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
+        }
+        float bgWidth = (float)bitmap.getWidth() / (float)bitmap.getHeight() * game.getHeight();
+
+        for (int i = 0; i <= Math.ceil(game.getWidth()/bgWidth) ; i++) {
+            gv.drawBitmap(bitmap, (float) i * bgWidth, 0, bgWidth, game.getHeight());
+        }
     }
 }
