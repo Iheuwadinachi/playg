@@ -19,14 +19,13 @@ public class Activity extends AppCompatActivity {
 
         // In this example, we don't require a Layout or any other Android Views than
         // are custom GameCanvas.
-        gameView = new GameView(this);
-        setContentView(R.layout.activity_platformer);
+        setContentView(R.layout.activity_);
 
-        gameView = findViewById(R.id.lumberjack);
+        gameView = findViewById(R.id.lumberView);
 
+//        gameView = findViewById(R.id.lumberjack);
+//
         coinIndicator = findViewById(R.id.coins);
-
-
 
 
 
@@ -39,7 +38,7 @@ public class Activity extends AppCompatActivity {
             game = new Game();
         }
 
-        coinIndicator.setText("Coins: " + game.coinsEarned);
+        //coinIndicator.setText("Coins: " + game.coinsEarned);
         game.thatActivity = this;
     }
 

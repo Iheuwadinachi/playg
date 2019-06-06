@@ -59,7 +59,7 @@ public class TreeGenerator extends Entity {
 
             int counter = 0;
             for (TreeElement element : logs) {
-                Log.i("extra_info", counter + ") X: " + element.position.x + ", Y:" + element.position.y);
+                Log.d("extra_info", counter + ") X: " + element.position.x + ", Y:" + element.position.y);
                 moveLogDown(counter);
                 counter++;
             }
@@ -72,13 +72,12 @@ public class TreeGenerator extends Entity {
         tickRate++;
     }
 
-
     private void moveLogDown(int index){
         int counter = 0;
         for (TreeElement element : logs){
             if(index == counter){
                 element.position.y += 20f;
-                break;
+                return;
             }
             counter ++;
         }

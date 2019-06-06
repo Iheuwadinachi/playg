@@ -25,7 +25,9 @@ public class Game extends GameModel {
 
     void updateTextView(){
         coinsEarned++;
-        if(thatActivity != null) thatActivity.coinIndicator.setText("Coins: " + coinsEarned);
+        if(thatActivity != null) {
+            thatActivity.coinIndicator.setText("Coins: " + coinsEarned);
+        }
     }
 
     @Override
