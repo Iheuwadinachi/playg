@@ -106,7 +106,7 @@ public class Lumberjack extends Entity {
         }
 
         float left = 0.6f * game.getWidth();
-        float top = 0.5f * game.getHeight();
+        float top = 0.55f * game.getHeight();//previously it was 0.5
 
         float extraWidth = width + 35f;
 
