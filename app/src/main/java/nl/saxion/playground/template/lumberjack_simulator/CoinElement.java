@@ -2,6 +2,8 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+import android.util.Printer;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.Entity;
@@ -15,56 +17,78 @@ public class CoinElement extends Entity {
     public static final float WIDTH = 8f;
     public static final float HEIGHT = 13f;
 
+    private static final int FRAMES_PER_SECOND = 10;
+
     private final float MIN_HEIGHT = 120f;
     private final float MAX_WIDTH = 35f;
 
+    private boolean doAnimation = true;
+
+    private int tickRate = 0;
+
+    private float GRAVITY = 1;
+    private final float MULTIPLY = 1.05f;
+    private final float DELETER = 0.8f;
+    private float BOUNCER = -3f;
+
+    private boolean inversion = false;
 
     //public int frame;
 
     private Vector position;
-
-    private Vector movement;
+    private Vector direction;
 
     private Game game;
 
     public CoinElement(Game game) {
         position = new Vector();
-        movement = new Vector(-0.5f,-0.6f);
+        direction = new Vector(0, 1f);
         this.game = game;
         bitmap = new Bitmap[8];
     }
 
     @Override
-    public void tick(){
-        position.x -= movement.x;
-        if(movement.y != 0){
-            position.y *= movement.y;
-        }
+    public void tick() {
 
-        if(position.x > MAX_WIDTH) {
-            position.x = MAX_WIDTH;
-            if (movement.x < 0.1f & movement.x > -0.1) {
-                movement.x = 0; //We don`t allow bouncing if the power left a little
-            } else movement.x = movement.x * -(float) (Math.random() * 0.5f) + 0.5f;
-        }
-        if(position.x < 0){
-            position.x = 0;
-            if (movement.x < 0.1f & movement.x > -0.1) {
-                movement.x = 0; //We don`t allow bouncing if the power left a little
-            } else movement.x = movement.x * -(float) (Math.random() * 0.5f) + 0.5f;
-        }
+        if (doAnimation) {
+            if (tickRate % FRAMES_PER_SECOND == 0) {
+                position.y += direction.y;
 
-        if(position.y > MIN_HEIGHT){ //because MIN_HEIGHT is a positive number
-            position.y = MIN_HEIGHT;
-            if(movement.y < 0.1 & movement.y > -0.1){
-                movement.y = 0;
-            } else{
-                movement.y = -(float) (Math.random() * (movement.y-movement.y/2) + movement.y/2);
+                if (inversion) {
+                    direction.y = GRAVITY * DELETER;
+                    GRAVITY = GRAVITY * DELETER;
+                } else {
+                    direction.y = GRAVITY * MULTIPLY;
+                    GRAVITY = GRAVITY * MULTIPLY;
+                }
+
+                if (position.y < 0) {
+                    position.y = 0;
+                    GRAVITY = 1f;
+                    inversion = false;
+                } else if (position.y > MIN_HEIGHT) {
+                    position.y = MIN_HEIGHT;
+                    GRAVITY = BOUNCER;
+                    BOUNCER += 0.6f;
+                    inversion = true;
+                }
+
+                if (direction.y < 0.2f && direction.y > -0.2f) {
+                    inversion = false;
+                    GRAVITY = 0.9f;
+                }
+
+                if (BOUNCER > 10) {
+                    doAnimation = false;
+                    position.y = MIN_HEIGHT;
+                }
+
+                Log.d("speed_info", "          *Coin has position: " + position.y + " f. BOUNCER : " + BOUNCER + "           ");
+
             }
+
         }
-
-        if(movement.y > 0) movement.y -= 0.09f;
-
+        tickRate++;
     }
 
     public void draw(GameView gv, int frame) {
@@ -82,7 +106,7 @@ public class CoinElement extends Entity {
         gv.drawBitmap(bitmap[frame], position.x, position.y, WIDTH, HEIGHT);
     }
 
-    public void setPosition(float x,float y){
+    public void setPosition(float x, float y) {
         position.x = x;
         position.y = y;
     }

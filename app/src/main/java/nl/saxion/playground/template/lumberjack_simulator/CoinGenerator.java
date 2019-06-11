@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
@@ -14,7 +15,7 @@ public class CoinGenerator extends Entity {
 
     private Game game;
 
-    private int NUMBER_OF_COINS = 2;
+    private int NUMBER_OF_COINS = 1;
 
     private int frameForCoin = 4;
 
@@ -35,7 +36,8 @@ public class CoinGenerator extends Entity {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement(game);
-                element.setPosition(40f,85f);
+                element.setPosition((float) (Math.random() * 25f),50f);
+
                 coins.add(element);
             }
             game.setTreeChopped(false,this);

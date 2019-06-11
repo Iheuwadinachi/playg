@@ -21,7 +21,7 @@ public class Activity extends AppCompatActivity {
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
 
-        gameView = findViewById(R.id.lumberView);
+        gameView = findViewById(R.id.lumberView33);
 
 //        gameView = findViewById(R.id.lumberjack);
 //
