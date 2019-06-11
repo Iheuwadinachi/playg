@@ -53,9 +53,9 @@ public class TreeGenerator extends Entity {
 
     @Override
     public void tick() {
-        if(game.treeChopped[0]){
+        if(game.ifTreeChopped(this)){
             logs.remove();
-            game.treeChopped[0] = false;
+            game.setTreeChopped(false,this);
 
             int counter = 0;
             for (TreeElement element : logs) {

@@ -55,8 +55,7 @@ public class Lumberjack extends Entity {
             } else {
                 leftTouchesToDestroy --;
                 if(leftTouchesToDestroy < 0) { //remake it
-                    game.treeChopped[0] = true;
-                    game.treeChopped[1] = true;
+                    game.setTreeChopped(true);
                     leftTouchesToDestroy = touchesToDestroy; //assign number of chops back(10)
                 }
                 frame = 0;

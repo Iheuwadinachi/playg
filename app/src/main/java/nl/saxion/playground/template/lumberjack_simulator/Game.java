@@ -6,10 +6,10 @@ import nl.saxion.playground.template.lib.GameModel;
 
 public class Game extends GameModel {
 
-    boolean[] treeChopped;
-    int coinsEarned;
+    private boolean[] treeChopped;
+    private int coinsEarned;
 
-    Activity thatActivity;
+    private Activity gameActivity;
 
     @Override
     public void start() {
@@ -18,15 +18,41 @@ public class Game extends GameModel {
 
         addEntity(new Background(this));
         addEntity(new TreeGenerator(this));
-        addEntity(new MoneyGenerator(this));
+        addEntity(new CoinGenerator(this));
         addEntity(new Lumberjack(this));
-        Log.i("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
+        Log.d("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
+    }
+
+    void setTreeChopped(boolean chopped){
+        for (int i = 0; i < treeChopped.length; i++) {
+            treeChopped[i] = chopped;
+        }
+    }
+
+    void setTreeChopped(boolean chopped, Object o){
+        if(o instanceof Lumberjack){
+            treeChopped[0] = chopped;
+        } else if(o instanceof CoinGenerator){
+            treeChopped[1] = chopped;
+        }
+    }
+
+    void setGameActivity(Activity activity){
+        gameActivity = activity;
+    }
+
+    boolean ifTreeChopped(Object o){
+        if(o instanceof Lumberjack){
+            return treeChopped[0];
+        } else if(o instanceof CoinGenerator){
+            return treeChopped[1];
+        } else return false;
     }
 
     void updateTextView(){
         coinsEarned++;
-        if(thatActivity != null) {
-            thatActivity.coinIndicator.setText("Coins: " + coinsEarned);
+        if(gameActivity != null) {
+            gameActivity.setTextIndicator(coinsEarned);
         }
     }
 

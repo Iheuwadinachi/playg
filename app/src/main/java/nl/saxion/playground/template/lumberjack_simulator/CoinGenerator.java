@@ -1,7 +1,5 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -12,8 +10,7 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.lib.GameView;
 
-// TODO: Rename with CoinGenerator
-public class MoneyGenerator extends Entity {
+public class CoinGenerator extends Entity {
 
     private Game game;
 
@@ -26,23 +23,22 @@ public class MoneyGenerator extends Entity {
 
     private int PERIOD_BETWEEN_COLLECTING = 30;
 
-    private List<MoneyElement> money;
+    private List<CoinElement> coins;
 
-    public MoneyGenerator(Game game) {
+    public CoinGenerator(Game game) {
         this.game = game;
-        money = new ArrayList<>();
+        coins = new ArrayList<>();
     }
 
     @Override
     public void tick() {
-        if (game.treeChopped[1]) {
+        if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
-                MoneyElement element = new MoneyElement(game);
-                element.position.y = 120f;
-                element.position.x = (float) (Math.random() * 30);
-                money.add(element);
+                CoinElement element = new CoinElement(game);
+                element.setPosition(40f,85f);
+                coins.add(element);
             }
-            game.treeChopped[1] = false;
+            game.setTreeChopped(false,this);
         }
 
         if(tickRate % 30 == 0) {
@@ -56,9 +52,14 @@ public class MoneyGenerator extends Entity {
         if (tickRate < 3000) tickRate++;
         else {
             tickRate = 0;
-            lastTimeTouched = PERIOD_BETWEEN_COLLECTING - 1;
+            lastTimeTouched = PERIOD_BETWEEN_COLLECTING - 2;
             lastTimeTouched *= -1;
         }
+
+        for (CoinElement element : coins){
+            element.tick();
+        }
+
     }
 
     @Override
@@ -69,11 +70,11 @@ public class MoneyGenerator extends Entity {
 
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
-        for (int i = money.size()-1 ; i > -1 ; i--) {
-            if (touch.x > money.get(i).position.x && touch.x < money.get(i).position.x + MoneyElement.WIDTH
-            && touch.y > money.get(i).position.y && touch.y < money.get(i).position.y + MoneyElement.HEIGHT) {
-                Log.i("extra_info", "Silver removed");
-                money.remove(i);
+        for (int i = coins.size()-1 ; i > -1 ; i--) {
+            if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+            && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                Log.d("extra_info", "Silver removed");
+                coins.remove(i);
                 game.updateTextView();
                 return;
             }
@@ -82,7 +83,7 @@ public class MoneyGenerator extends Entity {
 
     @Override
     public void draw(GameView gv) {
-        for (MoneyElement element : money) {
+        for (CoinElement element : coins) {
             element.draw(gv,frameForCoin);
         }
     }

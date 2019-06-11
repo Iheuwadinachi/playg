@@ -9,9 +9,9 @@ import nl.saxion.playground.template.lib.GameView;
 
 public class Activity extends AppCompatActivity {
 
-    Game game;
-    GameView gameView;
-    TextView coinIndicator;
+    private Game game;
+    private GameView gameView;
+    private TextView coinIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,11 @@ public class Activity extends AppCompatActivity {
         }
 
         //coinIndicator.setText("Coins: " + game.coinsEarned);
-        game.thatActivity = this;
+        game.setGameActivity(this);
+    }
+
+    void setTextIndicator(int coins){
+        coinIndicator.setText("Coins: " + coins);
     }
 
 

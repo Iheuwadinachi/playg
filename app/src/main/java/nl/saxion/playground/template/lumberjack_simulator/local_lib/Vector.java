@@ -14,4 +14,10 @@ public class Vector {
         x = 0f;
         y = 0f;
     }
+
+    public boolean ifNumbersAreZero(){
+        if(x > 0.1f & x < -0.1f && y > 0.1f & y < -0.1f){
+            return false;
+        } else return true;
+    }
 }
