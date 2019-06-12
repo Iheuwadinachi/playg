@@ -44,6 +44,7 @@ abstract public class Entity implements Comparable<Entity>, Serializable {
      * in which case this method does not need to be overridden.
      * @param gv The `GameView` to draw to.
      */
+
     public void draw(GameView gv) { }
 
     /**
