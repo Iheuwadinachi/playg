@@ -8,7 +8,7 @@ import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.platformer.Game;
 
 public class Activity extends AppCompatActivity {
-
+//teacher:
     private Game game;
     private GameView gameView;
 
