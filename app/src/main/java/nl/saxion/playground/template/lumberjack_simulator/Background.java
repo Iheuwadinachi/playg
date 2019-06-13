@@ -7,6 +7,11 @@ import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 
+/**
+ * Class for the background entity the code is lifted from one of the templates
+ * @author Michael Cornelisse
+ */
+
 public class Background extends Entity {
 
     private static Bitmap bitmap;

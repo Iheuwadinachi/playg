@@ -42,7 +42,7 @@ public class Lumberjack extends Entity {
         bitmap = new Bitmap[4];
         touchesToDestroy = 5;
         leftTouchesToDestroy = touchesToDestroy;
-        context = game.getGameActivity().getApplicationContext();
+        //context = game.getGameActivity().getApplicationContext();
         context = game.getGameActivity().getBaseContext();
         soundEffects = new SoundEffects(context);
     }

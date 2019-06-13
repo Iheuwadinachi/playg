@@ -1,5 +1,6 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -10,10 +11,13 @@ import java.util.Map;
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
 public class CoinGenerator extends Entity {
 
     private Game game;
+    private Context context;
+    private SoundEffects soundEffects;
 
     private int NUMBER_OF_COINS = 1;
 
@@ -29,6 +33,8 @@ public class CoinGenerator extends Entity {
     public CoinGenerator(Game game) {
         this.game = game;
         coins = new ArrayList<>();
+        context = game.getGameActivity().getBaseContext();
+        soundEffects = new SoundEffects(context);
     }
 
     @Override
@@ -76,6 +82,7 @@ public class CoinGenerator extends Entity {
             if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
             && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
                 Log.d("extra_info", "Silver removed");
+                soundEffects.playCoinSound();
                 coins.remove(i);
                 game.updateTextView();
                 return;
