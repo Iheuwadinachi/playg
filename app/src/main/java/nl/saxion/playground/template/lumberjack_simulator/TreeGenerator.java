@@ -21,6 +21,9 @@ public class TreeGenerator extends Entity {
     
     private static int ANIMATION_TIME = 50;
     private static int ANIMATION_LENGTH = 10;
+
+    public static float TREE_X_AXIS = 35f;
+
     private int logIndex;
 
     private int tickRate;
