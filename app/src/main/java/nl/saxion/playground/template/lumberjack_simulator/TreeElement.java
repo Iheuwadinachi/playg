@@ -9,11 +9,11 @@ import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 public class TreeElement extends Entity {
-
+// Teacher: Public access must be avoided instead try to use accessor methods.
     public Bitmap bitmap;
 
     public Vector position;
-
+// Teacher: game object have never been used.
     private Game game;
 
     private float width;
@@ -25,7 +25,7 @@ public class TreeElement extends Entity {
         width = 20f;
         height = 20f;
     }
-
+// Teacher: Empty method.
     @Override
     public void tick() {
 

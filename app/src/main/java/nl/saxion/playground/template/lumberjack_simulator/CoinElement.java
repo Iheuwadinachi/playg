@@ -46,7 +46,7 @@ public class CoinElement extends Entity {
         this.game = game;
         bitmap = new Bitmap[8];
     }
-
+// teacher: The function is too big try making it simple.
     @Override
     public void tick() {
 

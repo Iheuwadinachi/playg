@@ -3,7 +3,9 @@ package nl.saxion.playground.template.lumberjack_simulator;
 import android.util.Log;
 
 import nl.saxion.playground.template.lib.GameModel;
-
+// teacher: This class has only default constructor which means game object can be created anywhere
+// in the app which is dangerous. gameActvitiy might remain null in this case leading
+// to nullpointer exception.
 public class Game extends GameModel {
 
     private boolean[] treeChopped;
@@ -40,7 +42,8 @@ public class Game extends GameModel {
     void setGameActivity(Activity activity){
         gameActivity = activity;
     }
-
+// Teacher: using object class and type checking is not the best wy to do it. Secondly, never use
+//  0 as object name since it is hard to distinguish it from o.
     boolean ifTreeChopped(Object o){
         if(o instanceof Lumberjack){
             return treeChopped[0];

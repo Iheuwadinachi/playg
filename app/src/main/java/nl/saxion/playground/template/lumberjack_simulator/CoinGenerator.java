@@ -66,6 +66,7 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
+        // teacher: One line if statmenets are not really recommended.
         if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING) return;
 
         lastTimeTouched = tickRate;
@@ -73,6 +74,7 @@ public class CoinGenerator extends Entity {
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
         for (int i = coins.size()-1 ; i > -1 ; i--) {
+            // teacher: Can you simplify the conditions inside if.
             if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
             && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
                 Log.d("extra_info", "Silver removed");
@@ -85,6 +87,7 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void draw(GameView gv) {
+        // Teacher: Looping for on draw can be slower. I do not know exactly what you are trying to do here.
         for (CoinElement element : coins) {
             element.draw(gv,frameForCoin);
         }

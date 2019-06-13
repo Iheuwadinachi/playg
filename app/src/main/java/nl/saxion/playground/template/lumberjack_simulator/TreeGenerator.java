@@ -13,7 +13,10 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 
 public class TreeGenerator extends Entity {
+// Teacher: unused fields.
 
+// Teacher: log in constructor, element in tick() and bottomBlock in draw() represents the same object.
+//  Since game object have not been changed in this class.  You can make it a field.
     private Queue<TreeElement> logs;
     
     private static int ANIMATION_TIME = 50;
@@ -34,7 +37,7 @@ public class TreeGenerator extends Entity {
 
         float x = 35f;
         float y = 90f;
-
+        // Teacher: better to have a separate method that generate tree elements.
         for (int i = 0; i < 5; i++) {
             TreeElement log = new TreeElement(game);
 
