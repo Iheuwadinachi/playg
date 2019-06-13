@@ -10,6 +10,7 @@ import java.util.Map;
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 public class CoinGenerator extends Entity {
 
@@ -36,7 +37,12 @@ public class CoinGenerator extends Entity {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement(game);
-                element.setPosition((float) (Math.random() * 25f),50f);
+                element.setPosition(TreeGenerator.TREE_X_AXIS,100f);
+
+                float directionX = generateNumber(-3, element.MIN_X_SPEED);
+                float directionY = generateNumber(-7f,4f);
+
+                element.setDirection(new Vector(directionX,directionY));
 
                 coins.add(element);
             }
@@ -74,7 +80,7 @@ public class CoinGenerator extends Entity {
 
         for (int i = coins.size()-1 ; i > -1 ; i--) {
             if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
-            && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
                 Log.d("extra_info", "Silver removed");
                 coins.remove(i);
                 game.updateTextView();
@@ -89,4 +95,10 @@ public class CoinGenerator extends Entity {
             element.draw(gv,frameForCoin);
         }
     }
+
+    private float generateNumber(float from, float till){
+        float difference = Math.abs(till - from);
+        return (float) (Math.random() * difference) + from;
+    }
+
 }
