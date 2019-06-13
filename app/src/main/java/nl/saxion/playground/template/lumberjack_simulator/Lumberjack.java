@@ -1,6 +1,8 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
 
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,10 +11,13 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
 public class Lumberjack extends Entity {
 
 
+    private Context context;
+    private SoundEffects soundEffects;
     private final float width = 20f;
     private final float height = 35f;
 
@@ -37,11 +42,13 @@ public class Lumberjack extends Entity {
         bitmap = new Bitmap[4];
         touchesToDestroy = 5;
         leftTouchesToDestroy = touchesToDestroy;
+        context = game.getGameActivity().getApplicationContext();
+        context = game.getGameActivity().getBaseContext();
+        soundEffects = new SoundEffects(context);
     }
 
     @Override
     public void tick() {
-
         if(touched) {
             int chooser = tickRate - lastTouched;
             if(chooser < TIME_TO_DO_ALL_ANIMATION * 0.25){
@@ -52,6 +59,7 @@ public class Lumberjack extends Entity {
                 frame = 2;
             } else if(chooser < TIME_TO_DO_ALL_ANIMATION){
                 frame = 3;
+                soundEffects.playChopSound();
             } else {
                 leftTouchesToDestroy --;
                 if(leftTouchesToDestroy < 0) { //remake it
@@ -74,6 +82,7 @@ public class Lumberjack extends Entity {
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
 
         if(touch.lastAction == MotionEvent.ACTION_DOWN) {
+
             if (tickRate - lastTouched > TIME_TO_DO_ALL_ANIMATION) {
                 if(!touched) {
                     lastTouched = tickRate;
