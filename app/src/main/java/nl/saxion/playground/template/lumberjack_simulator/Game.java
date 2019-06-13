@@ -71,4 +71,8 @@ public class Game extends GameModel {
         return 100f * actualHeight / Math.min(actualWidth,actualHeight);
     }
 
+    public Activity getGameActivity(){
+        return  gameActivity;
+    }
+
 }
