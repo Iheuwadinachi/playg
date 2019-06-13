@@ -3,7 +3,6 @@ package nl.saxion.playground.template.lumberjack_simulator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.util.Printer;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.Entity;
@@ -17,23 +16,29 @@ public class CoinElement extends Entity {
     public static final float WIDTH = 8f;
     public static final float HEIGHT = 13f;
 
-    private static final int FRAMES_PER_SECOND = 10;
+    private static final int FRAMES_PER_SECOND = 15;
+
+    public final float MIN_X_SPEED = 0.4f;
 
     private final float MIN_HEIGHT = 120f;
-    private final float MAX_WIDTH = 35f;
+    private final float MAX_WIDTH = TreeGenerator.TREE_X_AXIS - 5f;
 
     private boolean doAnimation = true;
 
     private int tickRate = 0;
 
-    private float GRAVITY = 1;
-    private final float MULTIPLY = 1.05f;
-    private final float DELETER = 0.8f;
-    private float BOUNCER = -3f;
+    private float gravity = 1;
+    private static float MULTIPLY = 1.20f;
+    private static float DELETER = 0.7f;
+    private float bouncer = -2.5f;
+
+    private float deBouncer = 0.5f;
+    private float airFriction = 0.02f;
 
     private boolean inversion = false;
 
-    //public int frame;
+    private boolean goRight = false;
+    private boolean goLeft = true;
 
     private Vector position;
     private Vector direction;
@@ -42,54 +47,158 @@ public class CoinElement extends Entity {
 
     public CoinElement(Game game) {
         position = new Vector();
-        direction = new Vector(0, 1f);
+
         this.game = game;
         bitmap = new Bitmap[8];
     }
-
+// teacher: The function is too big try making it simple.
     @Override
     public void tick() {
-
         if (doAnimation) {
             if (tickRate % FRAMES_PER_SECOND == 0) {
                 position.y += direction.y;
+                position.x += direction.x;
 
-                if (inversion) {
-                    direction.y = GRAVITY * DELETER;
-                    GRAVITY = GRAVITY * DELETER;
+                if (inversion) { //If coin bounced from ground, it jumps upwards
+                    direction.y = gravity * DELETER;
+                    gravity = gravity * DELETER;
                 } else {
-                    direction.y = GRAVITY * MULTIPLY;
-                    GRAVITY = GRAVITY * MULTIPLY;
+                    direction.y = gravity * MULTIPLY;
+                    gravity = gravity * MULTIPLY;
+                }
+
+                if(goRight){
+                    direction.x -= airFriction;
+                    if(direction.x < MIN_X_SPEED) {
+                        direction.x = MIN_X_SPEED;
+                        Log.d("speed_info","Right direction ---> min speed was assigned");
+                    }
+                } else if (goLeft){
+                    direction.x -= airFriction;
+                    if(direction.x > (MIN_X_SPEED * -1f)){
+                        direction.x = (MIN_X_SPEED * -1f);
+                        Log.d("speed_info","Left direction <--- min speed was assigned");
+                    }
+                }
+
+                if(position.x < 0){
+                    direction.x = direction.x * -1; //Bouncing from wall
+                    position.x = 0;
+                    direction.x = Math.abs(direction.x);
+                    goRight = true;
+                    goLeft = false;
+                    Log.d("speed_info","Coin bounced from starting point");
+                } else if (position.x > MAX_WIDTH){
+                    direction.x = direction.x * -1; //Bouncing from wall
+                    position.x = MAX_WIDTH;
+                    direction.x = Math.abs(direction.x);
+                    direction.x = direction.x * -1;
+                    direction.x += deBouncer;
+                    goLeft = true;
+                    goRight = false;
+                    Log.d("speed_info","Coin bounced from tree");
                 }
 
                 if (position.y < 0) {
                     position.y = 0;
-                    GRAVITY = 1f;
+                    gravity = 1f;
                     inversion = false;
                 } else if (position.y > MIN_HEIGHT) {
                     position.y = MIN_HEIGHT;
-                    GRAVITY = BOUNCER;
-                    BOUNCER += 0.6f;
+                    gravity = bouncer;
+                    bouncer += 0.6f;
                     inversion = true;
                 }
 
                 if (direction.y < 0.2f && direction.y > -0.2f) {
                     inversion = false;
-                    GRAVITY = 0.9f;
+                    gravity = 0.9f;
                 }
 
-                if (BOUNCER > 10) {
+                if (bouncer > -1f) {
                     doAnimation = false;
                     position.y = MIN_HEIGHT;
                 }
 
-                Log.d("speed_info", "          *Coin has position: " + position.y + " f. BOUNCER : " + BOUNCER + "           ");
+                Log.d("speed_info", "  Coin has position X: " + position.x + " , y: " + position.y  + " direction.x : " + direction.x);
 
             }
-
         }
         tickRate++;
     }
+
+//    {
+//                position.y += direction.y;
+//                position.x += direction.x;
+//
+//                if (inversion) {
+//                    direction.y = gravity * DELETER;
+//                    gravity = gravity * DELETER;
+//                } else {
+//                    direction.y = gravity * MULTIPLY;
+//                    gravity = gravity * MULTIPLY;
+//                }
+//
+//                if(goRight){
+//                    direction.x = positionx;
+//                    positionx -= airFriction;
+//                    if(positionx < MIN_X_SPEED) {
+//                        positionx = MIN_X_SPEED;
+//                        Log.d("speed_info","Right direction ---> min speed was assigned");
+//                    }
+//                } else if (goLeft){
+//                    direction.x = positionx;
+//                    positionx -= airFriction;
+//                    if(positionx > (MIN_X_SPEED * -1f)){
+//                        positionx = (MIN_X_SPEED * -1f);
+//
+//                        Log.d("speed_info","Left direction <--- min speed was assigned");
+//                    }
+//                }
+//
+//                if(position.x < 0){
+//                    direction.x = direction.x * -1; //Bouncing from wall
+//                    position.x = 0;
+//                    positionx = Math.abs(positionx);
+//                    goRight = true;
+//                    goLeft = false;
+//                    Log.d("speed_info","Coin bounced from starting point");
+//                } else if (position.x > TreeGenerator.TREE_X_AXIS - 5f){
+//                    direction.x = direction.x * -1; //Bouncing from wall
+//                    position.x = TreeGenerator.TREE_X_AXIS - 5f;
+//                    positionx = Math.abs(positionx);
+//                    positionx = positionx * -1;
+//                    positionx += deBouncer;
+//                    goLeft = true;
+//                    goRight = false;
+//                    Log.d("speed_info","Coin bounced from tree");
+//                }
+//
+//                if (position.y < 0) {
+//                    position.y = 0;
+//                    gravity = 1f;
+//                    inversion = false;
+//                } else if (position.y > MIN_HEIGHT) {
+//                    position.y = MIN_HEIGHT;
+//                    gravity = bouncer;
+//                    bouncer += 0.6f;
+//                    inversion = true;
+//                }
+//
+//                if (direction.y < 0.2f && direction.y > -0.2f) {
+//                    inversion = false;
+//                    gravity = 0.9f;
+//                }
+//
+//                if (bouncer > 2.9f) {
+//                    doAnimation = false;
+//                    position.y = MIN_HEIGHT;
+//                }
+//
+//                Log.d("speed_info", "* Coin has position X: " + position.x + " f Y: " + position.y + " .Friction: " + positionx + " direction.x : " + direction.x);
+//
+//            }
+
 
     public void draw(GameView gv, int frame) {
 
@@ -113,5 +222,17 @@ public class CoinElement extends Entity {
 
     public Vector getPosition() {
         return position;
+    }
+
+    public void setDirection(Vector direction) {
+        this.direction = direction;
+        setUpVarriables();
+    }
+
+    private void setUpVarriables(){
+        if(direction.y < 1){
+            inversion = true;
+        }
+        gravity = direction.y;
     }
 }

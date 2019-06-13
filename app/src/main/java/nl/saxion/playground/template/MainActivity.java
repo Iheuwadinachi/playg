@@ -10,7 +10,7 @@ import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.spaceshooter.Game;
 import nl.saxion.playground.template.spaceshooter.Activity;
-
+// Teacher: This class has to be removed from master branch.
 public class MainActivity extends AppCompatActivity {
 
     GameView spaceShooterCanvas, platformerCanvas,lumberjackCanvas;

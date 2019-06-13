@@ -44,7 +44,12 @@ public class CoinGenerator extends Entity {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement(game);
-                element.setPosition((float) (Math.random() * 25f),50f);
+                element.setPosition(TreeGenerator.TREE_X_AXIS,100f);
+
+                float directionX = generateNumber(-3, element.MIN_X_SPEED);
+                float directionY = generateNumber(-7f,4f);
+
+                element.setDirection(new Vector(directionX,directionY));
 
                 coins.add(element);
             }
@@ -74,6 +79,7 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
+        // teacher: One line if statmenets are not really recommended.
         if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING) return;
 
         lastTimeTouched = tickRate;
@@ -81,8 +87,9 @@ public class CoinGenerator extends Entity {
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
         for (int i = coins.size()-1 ; i > -1 ; i--) {
+            // teacher: Can you simplify the conditions inside if.
             if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
-            && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
                 Log.d("extra_info", "Silver removed");
                 soundEffects.playCoinSound();
                 coins.remove(i);
@@ -94,8 +101,15 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void draw(GameView gv) {
+        // Teacher: Looping for on draw can be slower. I do not know exactly what you are trying to do here.
         for (CoinElement element : coins) {
             element.draw(gv,frameForCoin);
         }
     }
+
+    private float generateNumber(float from, float till){
+        float difference = Math.abs(till - from);
+        return (float) (Math.random() * difference) + from;
+    }
+
 }
