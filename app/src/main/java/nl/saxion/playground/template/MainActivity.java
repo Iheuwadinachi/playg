@@ -5,13 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.Activity;
+import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
 
 // Teacher: This class has to be removed from master branch.
+// Michael: Rewrote this class so that it now just runs our app
 public class MainActivity extends AppCompatActivity {
 
-    GameView lumberjackCanvas;
-    GameModel lumberjack;
+  GameView lumberjackCanvas;
+  GameModel lumberjack;
+  MusicPlayer musicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         lumberjackCanvas = findViewById(R.id.platformer);
         lumberjack = new nl.saxion.playground.template.lumberjack_simulator.Game();
+        musicPlayer = new MusicPlayer(MainActivity.this);
 
 
-        startActivity(new Intent(MainActivity.this, nl.saxion.playground.template.lumberjack_simulator.Activity.class));
-
-
-//        TextView lumberjackTV = findViewById(R.id.platformerText);
-//        lumberjackTV.setText("LUMBERJACK !!!");
-//        lumberjackTV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, nl.saxion.playground.template.lumberjack_simulator.Activity.class));
-//            }
-//        });
+        startActivity(new Intent(MainActivity.this, Activity.class));
     }
 
     @Override
