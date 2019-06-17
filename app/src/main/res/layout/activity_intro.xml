@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intro.IntroActivity">
+    tools:context=".lumberjack_simulator.intro.IntroActivity">
 
     <Button
         android:id="@+id/startGame"
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <nl.saxion.playground.template.intro.Typewriter
+    <nl.saxion.playground.template.lumberjack_simulator.intro.Typewriter
         android:id="@+id/typewriter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.intro;
+package nl.saxion.playground.template.lumberjack_simulator.intro;
 
 import android.content.Context;
 

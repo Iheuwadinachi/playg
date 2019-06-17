@@ -17,7 +17,7 @@ import nl.saxion.playground.template.R;
 
 public class SoundEffects {
     private static SoundPool soundPool;
-    private static int[] chopSounds = {}, coinSounds = {}, introSound = {};
+    private static int[] chopSounds = {}, coinSounds = {};
 
     /**
      * Constructor for the in game sound FX
@@ -89,18 +89,5 @@ public class SoundEffects {
 
         return new int[]{coinSoundOne, coinSoundTwo, coinSoundThree, coinSoundFour, coinSoundFive};
     }
-
-    private int[] initIntroSound (Context introContext){
-
-        int introSound = soundPool.load(introContext, R.raw.keyboard_typing, 1);
-
-        return new int[]{introSound};
-    }
-
-    public void playIntroSound(){
-        Random randomIndex = new Random();
-        soundPool.play(introSound[randomIndex.nextInt(introSound.length)], 1.0f,1.0f,1,0,1.0f);
-    }
-
 }
 

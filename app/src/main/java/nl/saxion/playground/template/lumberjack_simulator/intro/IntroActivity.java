@@ -1,8 +1,6 @@
-package nl.saxion.playground.template.intro;
+package nl.saxion.playground.template.lumberjack_simulator.intro;
 
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +8,15 @@ import android.widget.Button;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
-import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
+import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
 
 public class IntroActivity extends AppCompatActivity {
 
     private Button startGame;
 
-    public static MediaPlayer mMediaPlayer;
+    //public static MediaPlayer mMediaPlayer;
+    private static MusicPlayer musicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +56,23 @@ public class IntroActivity extends AppCompatActivity {
                 "Only you know the tree that never ends! \n" +
                 "We have a goldmine on our hands!\n ");
 
+        musicPlayer = new MusicPlayer(this, R.raw.keyboard_typing);
         startGame = findViewById(R.id.startGame);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                musicPlayer.stop();
                 openActivity();
+                musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);
             }
         });
-        mMediaPlayer = new MediaPlayer();
-    mMediaPlayer = MediaPlayer.create(this, R.raw.keyboard_typing);
-        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mMediaPlayer.start();
-}
+
+
+        //mMediaPlayer = new MediaPlayer();
+        //mMediaPlayer = MediaPlayer.create(this, R.raw.keyboard_typing);
+        //mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        //mMediaPlayer.start();
+    }
 
     public void openActivity() {
         Intent intent = new Intent(this, Activity.class);
