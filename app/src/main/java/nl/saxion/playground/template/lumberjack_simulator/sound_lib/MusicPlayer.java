@@ -3,6 +3,8 @@ package nl.saxion.playground.template.lumberjack_simulator.sound_lib;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import java.util.ArrayList;
+
 import nl.saxion.playground.template.R;
 
 /**
@@ -13,7 +15,6 @@ import nl.saxion.playground.template.R;
 public class MusicPlayer {
 
     private MediaPlayer mediaPlayer;
-
     /**
      * Constructor for music player
      *
@@ -37,13 +38,7 @@ public class MusicPlayer {
 
         }
         mediaPlayer.start();
-
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.start();
-            }
-        });
+        mediaPlayer.setLooping(true);
     }
 
     /**
@@ -70,6 +65,7 @@ public class MusicPlayer {
 
         if (mediaPlayer != null) {
             mediaPlayer.release();
+            //mediaPlayer.prepareAsync(); i think we need this but not sure how to use it properly yet.
             mediaPlayer = null;
         }
     }
