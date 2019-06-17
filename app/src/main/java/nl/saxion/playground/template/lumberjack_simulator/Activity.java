@@ -2,6 +2,9 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import nl.saxion.playground.template.R;
@@ -12,6 +15,9 @@ public class Activity extends AppCompatActivity {
     private Game game;
     private GameView gameView;
     private TextView coinIndicator;
+    BuyView buyView;
+
+    private static int REMOVE_ME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,27 +29,38 @@ public class Activity extends AppCompatActivity {
 
         gameView = findViewById(R.id.lumberView33);
 
-//        gameView = findViewById(R.id.lumberjack);
-//
+        buyView = findViewById(R.id.buy_view);
+
         coinIndicator = findViewById(R.id.coins);
-
-
 
         // If a running game has been serialized (because it has been paused for
         // a long time, or because of an orientation change), recreate the Game
         // object from the serialized bundle.
         if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
-            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.getSerializable("game");
+            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
+                    getSerializable("game");
         } else {
             game = new Game();
         }
 
-        //coinIndicator.setText("Coins: " + game.coinsEarned);
+        buyView.transparent("invisible");
+        buyView.setGame(game);
+
         game.setGameActivity(this);
+        gameView.setGame(game);
     }
 
     void setTextIndicator(int coins){
         coinIndicator.setText("Coins: " + coins);
+    }
+
+    public void onClick(View v) {
+        if(REMOVE_ME % 2 == 0){
+            buyView.transparent("visible");
+        } else {
+            buyView.transparent("invisible");
+        }
+        REMOVE_ME++;
     }
 
 

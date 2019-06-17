@@ -42,6 +42,12 @@ public class Game extends GameModel {
     void setGameActivity(Activity activity){
         gameActivity = activity;
     }
+
+    public void setCoinsEarned(int coinsEarned) {
+        this.coinsEarned = coinsEarned - 1;
+        updateTextView();
+    }
+
 // Teacher: using object class and type checking is not the best wy to do it. Secondly, never use
 //  0 as object name since it is hard to distinguish it from o.
     boolean ifTreeChopped(Object o){
@@ -54,9 +60,14 @@ public class Game extends GameModel {
 
     void updateTextView(){
         coinsEarned++;
+
         if(gameActivity != null) {
             gameActivity.setTextIndicator(coinsEarned);
         }
+    }
+
+    public int getCoinsEarned(){
+        return coinsEarned;
     }
 
     @Override
