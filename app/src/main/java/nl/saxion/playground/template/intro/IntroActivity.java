@@ -1,6 +1,8 @@
 package nl.saxion.playground.template.intro;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,14 @@ import android.widget.Button;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
+import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
 
 public class IntroActivity extends AppCompatActivity {
 
     private Button startGame;
+
+    public static MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,7 @@ public class IntroActivity extends AppCompatActivity {
         Typewriter writer = findViewById(R.id.typewriter);
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.greenishColor));
 
-        writer.setCharacterDelay(10);
+        writer.setCharacterDelay(50);
         writer.animateText(" On a calm summer afternoon of two thousand seventy-two,\n" +
                 "Degrees have reached a whole new boom.\n" +
                 " \n" +
@@ -59,7 +64,11 @@ public class IntroActivity extends AppCompatActivity {
                 openActivity();
             }
         });
-    }
+        mMediaPlayer = new MediaPlayer();
+    mMediaPlayer = MediaPlayer.create(this, R.raw.keyboard_typing);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.start();
+}
 
     public void openActivity() {
         Intent intent = new Intent(this, Activity.class);
