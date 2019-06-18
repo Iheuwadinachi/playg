@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/landscape">
+
+    <TextView
+        android:id="@+id/settingsTextView"
+        android:layout_width="174dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="112dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:text="SETTINGS"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/musicTextView"
+        android:layout_width="150dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="221dp"
+        android:fontFamily="serif"
+        android:text="MUSIC"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
+
+    <TextView
+        android:id="@+id/soundTextView"
+        android:layout_width="157dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="221dp"
+        android:fontFamily="serif"
+        android:text="SOUNDS"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
+
+    <Switch
+        android:id="@+id/soundSwitch"
+        android:layout_width="157dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="62dp"
+        android:checked="true"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/musicSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintStart_toEndOf="@+id/soundTextView"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
+
+    <Switch
+        android:id="@+id/musicSwitch"
+        android:layout_width="145dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="56dp"
+        android:checked="true"
+        android:fontFamily="serif"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/soundTextView"
+        app:layout_constraintTop_toBottomOf="@+id/soundSwitch" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="314dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="207dp"
+        android:background="@drawable/landscape1"
+        android:fontFamily="serif"
+        android:onClick="quitGame"
+        android:text="Quit Game"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+
+    <Button
+
+        android:id="@+id/deleteButton"
+        android:layout_width="195dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="190dp"
+        android:background="@drawable/landscape1"
+        android:fontFamily="serif"
+        android:onClick="deleteGame"
+        android:text="Delete Game"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/musicTextView" />
+
+</android.support.constraint.ConstraintLayout>
