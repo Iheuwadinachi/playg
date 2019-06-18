@@ -4,6 +4,8 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
+import java.util.ArrayList;
+
 import nl.saxion.playground.template.R;
 
 /**
@@ -66,6 +68,7 @@ public class MusicPlayer {
 
         if (mediaPlayer != null) {
             mediaPlayer.release();
+            //mediaPlayer.prepareAsync(); i think we need this but not sure how to use it properly yet.
             mediaPlayer = null;
         }
     }

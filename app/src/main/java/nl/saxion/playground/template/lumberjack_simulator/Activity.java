@@ -2,6 +2,7 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import nl.saxion.playground.template.R;
@@ -39,7 +40,7 @@ public class Activity extends AppCompatActivity {
         }
 
         //coinIndicator.setText("Coins: " + game.coinsEarned);
-        game.setGameActivity(this);
+       game.setGameActivity(this);
     }
 
     void setTextIndicator(int coins){
