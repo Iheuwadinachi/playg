@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         lumberjackCanvas = findViewById(R.id.platformer);
         lumberjack = new nl.saxion.playground.template.lumberjack_simulator.Game();
-        musicPlayer = new MusicPlayer(MainActivity.this);
+        musicPlayer = new MusicPlayer(MainActivity.this, R.raw.piano1);
+        musicPlayer.playMusic(this, R.raw.piano1);
 
 
         startActivity(new Intent(MainActivity.this, Activity.class));
