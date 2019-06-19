@@ -42,8 +42,7 @@ public class Lumberjack extends Entity {
         bitmap = new Bitmap[4];
         touchesToDestroy = 5;
         leftTouchesToDestroy = touchesToDestroy;
-        //context = game.getGameActivity().getApplicationContext();
-        context = game.getGameActivity().getBaseContext();
+        context = game.getGameActivity().getApplicationContext();
         soundEffects = new SoundEffects(context);
     }
 
@@ -134,8 +133,12 @@ public class Lumberjack extends Entity {
                 gv.drawBitmap(bitmap[3], extraLeft-3f, top, extraWidth, height);
                 break;
         }
+    }
 
 
+    public void setContext(Context context) {
+        this.context = context;
+        soundEffects = new SoundEffects(context);
     }
 }
 

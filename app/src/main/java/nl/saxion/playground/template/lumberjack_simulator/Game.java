@@ -2,41 +2,64 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.util.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
 // teacher: This class has only default constructor which means game object can be created anywhere
 // in the app which is dangerous. gameActvitiy might remain null in this case leading
 // to nullpointer exception.
 public class Game extends GameModel {
 
-    private boolean[] treeChopped;
     private int coinsEarned;
 
     private Activity gameActivity;
 
+    private Background background;
+    private TreeGenerator treeGenerator;
+    private CoinGenerator coinGenerator;
+    private Lumberjack lumberjack;
+
+    private Map<Entity,Boolean> treeChopped;
+
+    public Game(Activity gameActivity){
+        this.gameActivity = gameActivity;
+    }
+
     @Override
     public void start() {
+        treeChopped = new HashMap<>();
 
-        treeChopped = new boolean[2];
+        background = new Background(this);
+        addEntity(background);
 
-        addEntity(new Background(this));
-        addEntity(new TreeGenerator(this));
-        addEntity(new CoinGenerator(this));
-        addEntity(new Lumberjack(this));
+        treeGenerator = new TreeGenerator(this);
+        addEntity(treeGenerator);
+
+        coinGenerator = new CoinGenerator(this);
+        addEntity(coinGenerator);
+
+        lumberjack = new Lumberjack(this);
+        addEntity(lumberjack);
+
+        treeChopped.put(treeGenerator,false);
+        treeChopped.put(coinGenerator,false);
+        treeChopped.put(lumberjack,false);
+
+        coinsEarned = 1999999;
+
         Log.d("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }
 
     void setTreeChopped(boolean chopped){
-        for (int i = 0; i < treeChopped.length; i++) {
-            treeChopped[i] = chopped;
+        for (Entity entity : treeChopped.keySet()){
+            treeChopped.put(entity,chopped);
         }
     }
 
-    void setTreeChopped(boolean chopped, Object o){
-        if(o instanceof Lumberjack){
-            treeChopped[0] = chopped;
-        } else if(o instanceof CoinGenerator){
-            treeChopped[1] = chopped;
-        }
+    void setTreeChopped(boolean chopped, Entity entity){
+        treeChopped.put(entity,chopped);
     }
 
     void setGameActivity(Activity activity){
@@ -50,12 +73,17 @@ public class Game extends GameModel {
 
 // Teacher: using object class and type checking is not the best wy to do it. Secondly, never use
 //  0 as object name since it is hard to distinguish it from o.
-    boolean ifTreeChopped(Object o){
-        if(o instanceof Lumberjack){
-            return treeChopped[0];
-        } else if(o instanceof CoinGenerator){
-            return treeChopped[1];
-        } else return false;
+
+    //RESOLVED
+
+    boolean ifTreeChopped(Entity entity){
+        try {
+            return treeChopped.get(entity);
+        } catch (NullPointerException e){
+            Log.d("extra_info","Entity non in HashMap");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     void updateTextView(){
@@ -68,6 +96,10 @@ public class Game extends GameModel {
 
     public int getCoinsEarned(){
         return coinsEarned;
+    }
+
+    void addCoinToSpawn(){
+        coinGenerator.setNUMBER_OF_COINS(coinGenerator.getNUMBER_OF_COINS()+1);
     }
 
     @Override

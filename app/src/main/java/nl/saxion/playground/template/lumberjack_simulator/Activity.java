@@ -2,10 +2,10 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.NotSerializableException;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
@@ -36,12 +36,15 @@ public class Activity extends AppCompatActivity {
         // If a running game has been serialized (because it has been paused for
         // a long time, or because of an orientation change), recreate the Game
         // object from the serialized bundle.
-        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
-            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
-                    getSerializable("game");
-        } else {
-            game = new Game();
-        }
+//        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
+//            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
+//                    getSerializable("game");
+//            game.setGameActivity(this);
+//        } else {
+//            game = new Game(this);
+//        }
+
+        game = new Game(this);
 
         buyView.transparent("invisible");
         buyView.setGame(game);
@@ -58,7 +61,7 @@ public class Activity extends AppCompatActivity {
         if(REMOVE_ME % 2 == 0){
             buyView.transparent("visible");
         } else {
-            buyView.transparent("invisible");
+            buyView.transparent("gone");
         }
         REMOVE_ME++;
     }
@@ -67,7 +70,9 @@ public class Activity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("game", game);
+
+//      outState.putSerializable("game", game);
+
     }
 
     @Override

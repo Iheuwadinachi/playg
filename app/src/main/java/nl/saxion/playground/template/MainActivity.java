@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lumberjackCanvas = findViewById(R.id.platformer);
-        lumberjack = new nl.saxion.playground.template.lumberjack_simulator.Game();
+        //lumberjack = new nl.saxion.playground.template.lumberjack_simulator.Game();
         musicPlayer = new MusicPlayer(MainActivity.this);
 
 
