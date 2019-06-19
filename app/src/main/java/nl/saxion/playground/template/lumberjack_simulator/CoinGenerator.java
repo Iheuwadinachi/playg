@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import nl.saxion.playground.template.lumberjack_simulator.global.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 import nl.saxion.playground.template.lib.Entity;
@@ -34,7 +35,7 @@ public class CoinGenerator extends Entity {
     public CoinGenerator(Game game) {
         this.game = game;
         coins = new ArrayList<>();
-        Context context = game.getGameActivity().getBaseContext();
+        context = GlobalApplication.getAppContext();//game.getGameActivity().getBaseContext();
         soundEffects = new SoundEffects(context);
     }
 

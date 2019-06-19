@@ -1,7 +1,10 @@
 package nl.saxion.playground.template.lumberjack_simulator.sound_lib;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+
+import java.util.ArrayList;
 
 import nl.saxion.playground.template.R;
 
@@ -12,38 +15,33 @@ import nl.saxion.playground.template.R;
  */
 public class MusicPlayer {
 
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
+    private static int musicId;
 
     /**
      * Constructor for music player
      *
      * @param context context
      */
-    public MusicPlayer(Context context) {
-        playMusic(context);
+    public MusicPlayer(Context context, int musicId) {
+        playMusic(context, musicId);
 
     }
 
     /**
-     * Starts playing the music has a listener that checks if the music stops playing,
-     * it restarts the song if it does.
      *
      * @param context context
+     * @param musicId of the song that should be played
      */
-    private void playMusic(Context context) {
-
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(context, R.raw.piano1);
-
+    public void playMusic(Context context, int musicId){
+        if (mediaPlayer == null){
+            mediaPlayer = MediaPlayer.create(context, musicId);
         }
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.start();
-
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.start();
-            }
-        });
+        if (musicId == R.raw.piano1){
+            mediaPlayer.setLooping(true);
+        }
     }
 
     /**
@@ -70,6 +68,7 @@ public class MusicPlayer {
 
         if (mediaPlayer != null) {
             mediaPlayer.release();
+            //mediaPlayer.prepareAsync(); i think we need this but not sure how to use it properly yet.
             mediaPlayer = null;
         }
     }

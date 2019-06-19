@@ -31,7 +31,7 @@ public class SoundEffects {
                 .build();
 
         soundPool = new SoundPool.Builder()
-                .setMaxStreams(1)
+                .setMaxStreams(2)
                 .setAudioAttributes(audioAttributes)
                 .build();
         chopSounds = initChopSounds(context);
