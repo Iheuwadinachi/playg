@@ -24,24 +24,18 @@ public class TreeGenerator extends Entity {
 
     public static float TREE_X_AXIS = 35f;
 
-    private int logIndex;
-
-    private int tickRate;
-
-    private boolean addNewTreeElement;
+    private static final byte LOGS_AMOUNT = 6;
 
     private Game game;
 
     public TreeGenerator(Game game){
         this.game = game;
         logs = new PriorityQueue<>();
-        tickRate = 0;
-        logIndex = 0;
 
         float x = 35f;
         float y = 90f;
         // Teacher: better to have a separate method that generate tree elements.
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i <= LOGS_AMOUNT; i++) {
             TreeElement log = new TreeElement(game);
 
             float logSize = 20f;
@@ -71,11 +65,11 @@ public class TreeGenerator extends Entity {
             }
             TreeElement element = new TreeElement(game);
             element.position.x = 35f;
-            element.position.y = 10f;
+            element.position.y = -10f;
             logs.add(element);
         }
 
-        tickRate++;
+
     }
 
     private void moveLogDown(int index){
