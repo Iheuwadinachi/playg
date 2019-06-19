@@ -6,9 +6,8 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import nl.saxion.playground.template.lumberjack_simulator.global.GlobalApplication;
+import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 import nl.saxion.playground.template.lib.Entity;
