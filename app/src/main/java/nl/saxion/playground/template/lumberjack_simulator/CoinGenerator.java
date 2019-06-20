@@ -9,6 +9,7 @@ import java.util.List;
 
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHelper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
@@ -99,8 +100,9 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
-                    Constants.coins = game.getCoinsEarned();
-                    jsonHelper.saveConstants();
+                    Save save = new Save();
+                    save = save.getInstance();
+                    save.setCoins(game.getCoinsEarned());
                     game.updateTextView();
                     return;
                 }
@@ -113,8 +115,9 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
-                    Constants.coins = game.getCoinsEarned();
-                    jsonHelper.saveConstants();
+                    Save save = new Save();
+                    save = save.getInstance();
+                    save.setCoins(game.getCoinsEarned());
                     game.updateTextView();
                     return;
                 }

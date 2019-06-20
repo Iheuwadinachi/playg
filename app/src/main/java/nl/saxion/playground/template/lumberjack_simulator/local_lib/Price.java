@@ -8,6 +8,8 @@ public class Price {
     private int maxTimesUpgrade;
     private int startPrice;
 
+    private String currentPrice;
+
     private List<Integer> risingPrices;
 
     private  double multiply = 5;
@@ -38,9 +40,15 @@ public class Price {
     public String getNewPrice(){
         priceCounter++;
         if(priceCounter >= risingPrices.size()) return "-";
-        return Integer.toString(risingPrices.get(priceCounter));
+        currentPrice = Integer.toString(risingPrices.get(priceCounter));
+        return currentPrice;
     }
 
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
 
-
+    public int getPriceCounter() {
+        return priceCounter + 1;
+    }
 }

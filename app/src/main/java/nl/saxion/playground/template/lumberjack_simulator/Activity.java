@@ -9,7 +9,10 @@ import java.io.NotSerializableException;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHelper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 
 public class Activity extends AppCompatActivity {
 //teacher:
@@ -17,13 +20,14 @@ public class Activity extends AppCompatActivity {
     private GameView gameView;
     private TextView coinIndicator;
     BuyView buyView;
+    private JsonHelper jsonHelper;
 
     private static int REMOVE_ME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        jsonHelper = new JsonHelper(getApplicationContext());
         // In this example, we don't require a Layout or any other Android Views than
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
@@ -33,6 +37,8 @@ public class Activity extends AppCompatActivity {
         gameView = findViewById(R.id.lumberView33);
 
         buyView = findViewById(R.id.buy_view);
+
+
 
         coinIndicator = findViewById(R.id.coins);
 
@@ -49,6 +55,8 @@ public class Activity extends AppCompatActivity {
 
         game = new Game(this);
 
+
+
         DataWrapper dataWrapper = new DataWrapper();
         dataWrapper = dataWrapper.getInstance();
 
@@ -61,6 +69,10 @@ public class Activity extends AppCompatActivity {
 
         game.setGameActivity(this);
         gameView.setGame(game);
+    }
+
+    void setPrices(){
+        buyView.setPrices(Constants.prices);
     }
 
     void setTextIndicator(int coins){
@@ -93,7 +105,14 @@ public class Activity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
+        Save save = new Save();
+        save = save.getInstance();
+
+        save.setPrices(buyView.getPrices());
+
+        jsonHelper.saveConstants();
         gameView.setGame(null);
+        super.onPause();
+
     }
 }

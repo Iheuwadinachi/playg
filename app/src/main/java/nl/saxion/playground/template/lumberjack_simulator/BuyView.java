@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Price;
 
 /**
@@ -111,6 +112,9 @@ public class BuyView extends RelativeLayout {
         if (game.getCoinsEarned() >= currentPrice) {
             if(prices[0] == null) prices[0] = new Price(10,15);
             game.setCoinsEarned(game.getCoinsEarned() - currentPrice);
+            Save save = new Save();
+            save = save.getInstance();
+            save.setCoins(game.getCoinsEarned());
             buyNewCoin.setText(prices[0].getNewPrice());
             game.addCoinToSpawn();
             Log.d("extra_info", "Bought new coin");
@@ -139,4 +143,25 @@ public class BuyView extends RelativeLayout {
 
     }
 
+    public void setPrices(Price[] prices) {
+        if(prices != null) this.prices = prices;
+        updateInfo();
+    }
+
+    public Price[] getPrices() {
+        return prices;
+    }
+
+    private void updateInfo(){
+        try {
+            if(prices[0] != null) {
+                for (int i = 0; i < prices[0].getPriceCounter(); i++) {
+                    game.addCoinToSpawn();
+                }
+                buyNewCoin.setText(prices[0].getCurrentPrice());
+            }
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+    }
 }
