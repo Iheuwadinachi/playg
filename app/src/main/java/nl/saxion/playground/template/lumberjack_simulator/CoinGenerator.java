@@ -7,8 +7,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHelper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
@@ -33,7 +32,7 @@ public class CoinGenerator extends Entity {
     private int PERIOD_BETWEEN_COLLECTING = 30;
 
     private List<CoinElement> coins;
-    private JsonHelper jsonHelper;
+    private JsonHandler jsonHandler;
 
 
     public CoinGenerator(Game game) {
@@ -41,7 +40,7 @@ public class CoinGenerator extends Entity {
         coins = new ArrayList<>();
         Context context = GlobalApplication.getAppContext();
         soundEffects = new SoundEffects(context);
-        jsonHelper = new JsonHelper(context);
+        jsonHandler = new JsonHandler(context);
     }
 
     @Override

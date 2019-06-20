@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.NotSerializableException;
-
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHelper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 
 public class Activity extends AppCompatActivity {
@@ -20,14 +18,14 @@ public class Activity extends AppCompatActivity {
     private GameView gameView;
     private TextView coinIndicator;
     BuyView buyView;
-    private JsonHelper jsonHelper;
+    private JsonHandler jsonHandler;
 
     private static int REMOVE_ME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        jsonHelper = new JsonHelper(getApplicationContext());
+        jsonHandler = new JsonHandler(getApplicationContext());
         // In this example, we don't require a Layout or any other Android Views than
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
@@ -110,7 +108,7 @@ public class Activity extends AppCompatActivity {
 
         save.setPrices(buyView.getPrices());
 
-        jsonHelper.saveConstants();
+        jsonHandler.saveConstants();
         gameView.setGame(null);
         super.onPause();
 

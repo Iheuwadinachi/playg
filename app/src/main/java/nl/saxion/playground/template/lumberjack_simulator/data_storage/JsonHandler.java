@@ -8,38 +8,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author Adomas Aleksandravicius, Michael Cornelisse
  */
-public class JsonHelper {
+public class JsonHandler {
 
     private Context context;
 
-    public JsonHelper(Context context) {
+    public JsonHandler(Context context) {
         this.context = context;
     }
 
-    public String readJSON(String fileName) {
-        FileReader reader = null;
-        File file = new File(context.getFilesDir() + "/" + fileName);
-        try {
-            reader = new FileReader(file);
-            Gson gson = new Gson();
-            Constants constants = gson.fromJson(reader, Constants.class);
-
-            return constants.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
     public void loadConstants() {
         FileReader reader = null;
         File file = new File(context.getFilesDir() + "/save.json");
@@ -58,7 +39,7 @@ public class JsonHelper {
             e.printStackTrace();
         } finally {
             try {
-                reader.close();
+                Objects.requireNonNull(reader).close();
             } catch (NullPointerException | IOException e) {
                 e.printStackTrace();
             }
@@ -78,7 +59,7 @@ public class JsonHelper {
             e.printStackTrace();
         } finally {
             try {
-                outputStream.close();
+                Objects.requireNonNull(outputStream).close();
             } catch (NullPointerException | IOException e) {
                 e.printStackTrace();
             }
