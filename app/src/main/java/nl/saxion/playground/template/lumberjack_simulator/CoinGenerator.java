@@ -86,21 +86,34 @@ public class CoinGenerator extends Entity {
         // teacher: One line if statmenets are not really recommended.
         if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING) return;
 
+
         lastTimeTouched = tickRate;
 
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
-        for (int i = coins.size()-1 ; i > -1 ; i--) {
-            // teacher: Can you simplify the conditions inside if.
-            if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
-                    && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
-                Log.d("extra_info", "Silver removed");
-                soundEffects.playCoinSound();
-                coins.remove(i);
-                game.updateTextView();
-                Constants.coins = game.getCoinsEarned();
-                jsonHelper.saveConstants();
-                return;
+        if(event.getAction() == MotionEvent.ACTION_MOVE) {
+            for (int i = coins.size() - 1; i > -1; i--) {
+                // teacher: Can you simplify the conditions inside if.
+                if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+                        && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    Log.d("extra_info", "Silver removed");
+                    soundEffects.playCoinSound();
+                    coins.remove(i);
+                    game.updateTextView();
+                    return;
+                }
+            }
+        }else if(event.getAction() == MotionEvent.ACTION_DOWN){
+            for (int i = coins.size() - 1; i > -1; i--) {
+                // teacher: Can you simplify the conditions inside if.
+                if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+                        && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    Log.d("extra_info", "Silver removed");
+                    soundEffects.playCoinSound();
+                    coins.remove(i);
+                    game.updateTextView();
+                    return;
+                }
             }
         }
     }
