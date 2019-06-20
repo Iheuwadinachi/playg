@@ -1,5 +1,8 @@
 package nl.saxion.playground.template.lumberjack_simulator.data_storage;
 
+/**
+ * @author Mark Kravchuk
+ */
 public class DataWrapper {
     public static int coins = 0;
 
@@ -7,15 +10,17 @@ public class DataWrapper {
 
     }
 
-    public static DataWrapper instance;
+    private static DataWrapper instance;
 
     public DataWrapper getInstance() {
-        if(instance == null) instance = new DataWrapper();
+        if(instance == null){
+            instance = new DataWrapper();
+        }
         return instance;
     }
 
     public void setInstance(DataWrapper instance) {
-        this.instance = instance;
+        DataWrapper.instance = instance;
     }
 
     public  int getCoins() {

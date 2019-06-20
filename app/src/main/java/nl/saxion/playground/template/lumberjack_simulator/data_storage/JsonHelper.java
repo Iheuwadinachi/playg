@@ -9,6 +9,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * @author Adomas Aleksandravicius, Michael Cornelisse
+ */
 public class JsonHelper {
 
     private Context context;

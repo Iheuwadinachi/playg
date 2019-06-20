@@ -77,7 +77,7 @@ public class IntroActivity extends AppCompatActivity {
                 jsonHelper.loadConstants();
                 DataWrapper dataWrapper = new DataWrapper();
                 dataWrapper.setInstance(dataWrapper);
-                dataWrapper.setCoins(Constants.coins);
+                dataWrapper.setCoins(Constants.coins + 1);
                 musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);
             }
         });
