@@ -3,17 +3,25 @@ package nl.saxion.playground.template.lumberjack_simulator.intro;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHelper;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
+import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 
 
 public class IntroActivity extends AppCompatActivity {
 
     private Button startGame;
+    private JsonHelper jsonHelper;
+    private Game game;
 
     //public static MediaPlayer mMediaPlayer;
     private static MusicPlayer musicPlayer;
@@ -21,6 +29,7 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_intro);
 
         Typewriter writer = findViewById(R.id.typewriter);
@@ -58,11 +67,17 @@ public class IntroActivity extends AppCompatActivity {
 
         musicPlayer = new MusicPlayer(this, R.raw.keyboard_typing);
         startGame = findViewById(R.id.startGame);
+
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 musicPlayer.stop();
                 openActivity();
+                jsonHelper = new JsonHelper(getApplicationContext());
+                jsonHelper.loadConstants();
+                DataWrapper dataWrapper = new DataWrapper();
+                dataWrapper.setInstance(dataWrapper);
+                dataWrapper.setCoins(Constants.coins);
                 musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);
             }
         });
