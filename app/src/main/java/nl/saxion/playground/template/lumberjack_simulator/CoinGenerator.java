@@ -18,7 +18,6 @@ import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects
 public class CoinGenerator extends Entity {
 
     private Game game;
-    private Context context;
     private SoundEffects soundEffects;
 
     private int NUMBER_OF_COINS = 1;
@@ -35,7 +34,7 @@ public class CoinGenerator extends Entity {
     public CoinGenerator(Game game) {
         this.game = game;
         coins = new ArrayList<>();
-        context = GlobalApplication.getAppContext();//game.getGameActivity().getBaseContext();
+        Context context = GlobalApplication.getAppContext();
         soundEffects = new SoundEffects(context);
     }
 
@@ -112,4 +111,11 @@ public class CoinGenerator extends Entity {
         return (float) (Math.random() * difference) + from;
     }
 
+    public void setNUMBER_OF_COINS(int NUMBER_OF_COINS) {
+        this.NUMBER_OF_COINS = NUMBER_OF_COINS;
+    }
+
+    public int getNUMBER_OF_COINS() {
+        return NUMBER_OF_COINS;
+    }
 }

@@ -135,8 +135,12 @@ public class Lumberjack extends Entity {
                 gv.drawBitmap(bitmap[3], extraLeft-3f, top, extraWidth, height);
                 break;
         }
+    }
 
 
+    public void setContext(Context context) {
+        this.context = context;
+        soundEffects = new SoundEffects(context);
     }
 }
 
