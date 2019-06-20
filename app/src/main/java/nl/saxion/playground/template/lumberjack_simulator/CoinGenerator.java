@@ -35,7 +35,7 @@ public class CoinGenerator extends Entity {
     public CoinGenerator(Game game) {
         this.game = game;
         coins = new ArrayList<>();
-        context = GlobalApplication.getAppContext();//game.getGameActivity().getBaseContext();
+        Context context = GlobalApplication.getAppContext();
         soundEffects = new SoundEffects(context);
     }
 

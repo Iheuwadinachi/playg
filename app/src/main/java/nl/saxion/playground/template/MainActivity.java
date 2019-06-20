@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
   GameView lumberjackCanvas;
   GameModel lumberjack;
-  MusicPlayer musicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         lumberjackCanvas = findViewById(R.id.platformer);
         //lumberjack = new nl.saxion.playground.template.lumberjack_simulator.Game();
-        musicPlayer = new MusicPlayer(MainActivity.this);
 
 
         startActivity(new Intent(MainActivity.this, Activity.class));
