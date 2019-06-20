@@ -20,7 +20,7 @@ public class CoinElement extends Entity {
 
     public final float MIN_X_SPEED = 0.4f;
 
-    private final float MIN_HEIGHT = 120f;
+    private float MAX_HEIGHT = TreeGenerator.TREE_Y_AXIS_FINISH + 30f; // +2 wooden blocks
     private final float MAX_WIDTH = TreeGenerator.TREE_X_AXIS - 5f;
 
     private boolean doAnimation = true;
@@ -52,6 +52,8 @@ public class CoinElement extends Entity {
         bitmap = new Bitmap[8];
     }
 // teacher: The function is too big try making it simple.
+// student: this
+
     @Override
     public void tick() {
         if (doAnimation) {
@@ -103,8 +105,8 @@ public class CoinElement extends Entity {
                     position.y = 0;
                     gravity = 1f;
                     inversion = false;
-                } else if (position.y > MIN_HEIGHT) {
-                    position.y = MIN_HEIGHT;
+                } else if (position.y > MAX_HEIGHT) {
+                    position.y = MAX_HEIGHT;
                     gravity = bouncer;
                     bouncer += 0.6f;
                     inversion = true;
@@ -117,7 +119,7 @@ public class CoinElement extends Entity {
 
                 if (bouncer > -1f) {
                     doAnimation = false;
-                    position.y = MIN_HEIGHT;
+                    position.y = MAX_HEIGHT;
                 }
 
                 Log.d("speed_info", "  Coin has position X: " + position.x + " , y: " + position.y  + " direction.x : " + direction.x);
@@ -178,8 +180,8 @@ public class CoinElement extends Entity {
 //                    position.y = 0;
 //                    gravity = 1f;
 //                    inversion = false;
-//                } else if (position.y > MIN_HEIGHT) {
-//                    position.y = MIN_HEIGHT;
+//                } else if (position.y > MAX_HEIGHT) {
+//                    position.y = MAX_HEIGHT;
 //                    gravity = bouncer;
 //                    bouncer += 0.6f;
 //                    inversion = true;
@@ -192,7 +194,7 @@ public class CoinElement extends Entity {
 //
 //                if (bouncer > 2.9f) {
 //                    doAnimation = false;
-//                    position.y = MIN_HEIGHT;
+//                    position.y = MAX_HEIGHT;
 //                }
 //
 //                Log.d("speed_info", "* Coin has position X: " + position.x + " f Y: " + position.y + " .Friction: " + positionx + " direction.x : " + direction.x);

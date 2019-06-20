@@ -114,7 +114,7 @@ public class Lumberjack extends Entity {
         }
 
         float left = 0.6f * game.getWidth();
-        float top = 0.55f * game.getHeight();//previously it was 0.5
+        float top = TreeGenerator.TREE_Y_AXIS_FINISH + 5f;//previously it was 0.5, then 0.53f
 
         float extraWidth = width + 35f;
 

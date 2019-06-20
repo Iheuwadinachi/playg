@@ -44,7 +44,7 @@ public class CoinGenerator extends Entity {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement(game);
-                element.setPosition(TreeGenerator.TREE_X_AXIS,100f);
+                element.setPosition(TreeGenerator.TREE_X_AXIS,80f);//TODO: Check if it don`t conflict
 
                 float directionX = generateNumber(-3, element.MIN_X_SPEED);
                 float directionY = generateNumber(-7f,4f);
