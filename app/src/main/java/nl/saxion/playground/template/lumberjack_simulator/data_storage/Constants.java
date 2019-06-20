@@ -1,5 +1,8 @@
 package nl.saxion.playground.template.lumberjack_simulator.data_storage;
 
+/**
+ * @author Adomas Aleksandravicius, Michael Cornelisse
+ */
 public class Constants {
     public static int coins = 0;
 

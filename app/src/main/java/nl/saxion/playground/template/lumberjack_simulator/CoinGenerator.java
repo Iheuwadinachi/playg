@@ -99,6 +99,8 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
+                    Constants.coins = game.getCoinsEarned();
+                    jsonHelper.saveConstants();
                     game.updateTextView();
                     return;
                 }
@@ -111,6 +113,8 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
+                    Constants.coins = game.getCoinsEarned();
+                    jsonHelper.saveConstants();
                     game.updateTextView();
                     return;
                 }
