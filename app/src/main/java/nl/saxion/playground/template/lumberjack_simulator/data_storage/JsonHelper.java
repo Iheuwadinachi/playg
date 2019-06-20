@@ -49,6 +49,7 @@ public class JsonHelper {
              * Load Save into Constants
              */
             Constants.coins = save.getCoins();
+            Constants.prices = save.getPrices();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,6 +64,7 @@ public class JsonHelper {
 
     public void saveConstants() {
         Save save = new Save();
+        save = save.getInstance();
         String jsonString = new Gson().toJson(save, Save.class);
         FileOutputStream outputStream = null;
         File file = new File(context.getFilesDir() + "/save.json");
