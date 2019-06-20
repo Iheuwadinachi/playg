@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".lumberjack_simulator.Activity">
+        <activity android:name=".lumberjack_simulator.Activity"/>
+        <activity android:name=".lumberjack_simulator.intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
