@@ -52,14 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         platformer = new nl.saxion.playground.template.platformer.Game();
 
-//        TextView lumberjackTV = findViewById(R.id.platformerText);
-//        lumberjackTV.setText("LUMBERJACK !!!");
-//        lumberjackTV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, nl.saxion.playground.template.lumberjack_simulator.Activity.class));
-//            }
-//        });
+
     }
 
     @Override
