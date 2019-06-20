@@ -7,6 +7,8 @@ import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
+
 // teacher: This class has only default constructor which means game object can be created anywhere
 // in the app which is dangerous. gameActvitiy might remain null in this case leading
 // to nullpointer exception.
@@ -20,6 +22,7 @@ public class Game extends GameModel {
     private TreeGenerator treeGenerator;
     private CoinGenerator coinGenerator;
     private Lumberjack lumberjack;
+
 
     private Map<Entity,Boolean> treeChopped;
 
@@ -47,8 +50,6 @@ public class Game extends GameModel {
         treeChopped.put(coinGenerator,false);
         treeChopped.put(lumberjack,false);
 
-        coinsEarned = 1999999;
-
         Log.d("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }
 
@@ -68,6 +69,7 @@ public class Game extends GameModel {
 
     public void setCoinsEarned(int coinsEarned) {
         this.coinsEarned = coinsEarned - 1;
+
         updateTextView();
     }
 
@@ -117,5 +119,7 @@ public class Game extends GameModel {
     public Activity getGameActivity(){
         return  gameActivity;
     }
+
+
 
 }

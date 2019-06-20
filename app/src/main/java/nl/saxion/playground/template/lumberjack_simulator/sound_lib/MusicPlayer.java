@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
-import java.util.ArrayList;
 
 import nl.saxion.playground.template.R;
 
@@ -16,7 +15,6 @@ import nl.saxion.playground.template.R;
 public class MusicPlayer {
 
     private static MediaPlayer mediaPlayer;
-    private static int musicId;
 
     /**
      * Constructor for music player

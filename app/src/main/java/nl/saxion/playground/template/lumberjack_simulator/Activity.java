@@ -9,6 +9,7 @@ import java.io.NotSerializableException;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 
 public class Activity extends AppCompatActivity {
 //teacher:
@@ -26,6 +27,8 @@ public class Activity extends AppCompatActivity {
         // In this example, we don't require a Layout or any other Android Views than
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
+
+
 
         gameView = findViewById(R.id.lumberView33);
 
@@ -45,6 +48,13 @@ public class Activity extends AppCompatActivity {
 //        }
 
         game = new Game(this);
+
+        DataWrapper dataWrapper = new DataWrapper();
+        dataWrapper = dataWrapper.getInstance();
+
+        int coins = dataWrapper.getCoins();
+        game.setCoinsEarned(coins);
+
 
         buyView.transparent("invisible");
         buyView.setGame(game);
