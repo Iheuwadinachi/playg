@@ -14,6 +14,8 @@ import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.lumberjack_simulator.global.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
+
+
 public class Lumberjack extends Entity {
 
 
@@ -37,6 +39,8 @@ public class Lumberjack extends Entity {
     private Game game;
 
     private int frame;
+
+    private boolean dayTheme = true;
 
     public Lumberjack(Game game) {
         this.game = game;
@@ -101,17 +105,36 @@ public class Lumberjack extends Entity {
 
     @Override
     public void draw(GameView gv) {
-        if (bitmap[0]==null) {
-            bitmap[0] = gv.getBitmapFromResource(R.drawable.timberman);
+
+        if (dayTheme) {
+
+            if (bitmap[0] == null) {
+                bitmap[0] = gv.getBitmapFromResource(R.drawable.timberman);
+            }
+            if (bitmap[1] == null) {
+                bitmap[1] = gv.getBitmapFromResource(R.drawable.timberman1);
+            }
+            if (bitmap[2] == null) {
+                bitmap[2] = gv.getBitmapFromResource(R.drawable.timberman2);
+            }
+            if (bitmap[3] == null) {
+                bitmap[3] = gv.getBitmapFromResource(R.drawable.timberman3);
+            }
         }
-        if (bitmap[1]==null) {
-            bitmap[1] = gv.getBitmapFromResource(R.drawable.timberman1);
-        }
-        if (bitmap[2]==null) {
-            bitmap[2] = gv.getBitmapFromResource(R.drawable.timberman2);
-        }
-        if (bitmap[3]==null) {
-            bitmap[3] = gv.getBitmapFromResource(R.drawable.timberman3);
+        else {
+
+            if (bitmap[0] == null) {
+                bitmap[0] = gv.getBitmapFromResource(R.drawable.timberman_test);
+            }
+            if (bitmap[1] == null) {
+                bitmap[1] = gv.getBitmapFromResource(R.drawable.timberman1_test);
+            }
+            if (bitmap[2] == null) {
+                bitmap[2] = gv.getBitmapFromResource(R.drawable.timberman2_test);
+            }
+            if (bitmap[3] == null) {
+                bitmap[3] = gv.getBitmapFromResource(R.drawable.timberman3_test);
+            }
         }
 
         float left = 0.6f * game.getWidth();

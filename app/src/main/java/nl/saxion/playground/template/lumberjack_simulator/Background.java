@@ -17,14 +17,21 @@ public class Background extends Entity {
     private static Bitmap bitmap;
 
     private Game game;
+    private boolean dayTime = true;
 
     Background(Game game) {
         this.game = game;
     }
 
+
     public void draw(GameView gv){
         if (bitmap==null){
-            bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
+            if (dayTime) {
+                bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
+            }
+            else{
+                bitmap = gv.getBitmapFromResource(R.drawable.background_test);
+            }
         }
         float bgWidth = (float)bitmap.getWidth() / (float)bitmap.getHeight() * game.getHeight();
 

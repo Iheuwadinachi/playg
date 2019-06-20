@@ -1,10 +1,13 @@
 package nl.saxion.playground.template.lumberjack_simulator.intro;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.concurrent.Delayed;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
@@ -57,10 +60,11 @@ public class IntroActivity extends AppCompatActivity {
                 "We have a goldmine on our hands!\n ");
 
         musicPlayer = new MusicPlayer(this, R.raw.keyboard_typing);
-        startGame = findViewById(R.id.startGame);
+        startGame = findViewById(R.id.skip_button2);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 musicPlayer.stop();
                 openActivity();
                 musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);

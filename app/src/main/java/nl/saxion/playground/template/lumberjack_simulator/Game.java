@@ -7,6 +7,7 @@ import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
+
 // teacher: This class has only default constructor which means game object can be created anywhere
 // in the app which is dangerous. gameActvitiy might remain null in this case leading
 // to nullpointer exception.
