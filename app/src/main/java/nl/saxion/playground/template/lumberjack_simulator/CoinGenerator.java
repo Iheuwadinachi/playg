@@ -6,8 +6,10 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
+import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 import nl.saxion.playground.template.lib.Entity;
@@ -18,7 +20,6 @@ import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects
 public class CoinGenerator extends Entity {
 
     private Game game;
-    private Context context;
     private SoundEffects soundEffects;
 
     private int NUMBER_OF_COINS = 1;
@@ -31,12 +32,15 @@ public class CoinGenerator extends Entity {
     private int PERIOD_BETWEEN_COLLECTING = 30;
 
     private List<CoinElement> coins;
+    private JsonHandler jsonHandler;
+
 
     public CoinGenerator(Game game) {
         this.game = game;
         coins = new ArrayList<>();
-        context = game.getGameActivity().getBaseContext();
+        Context context = GlobalApplication.getAppContext();
         soundEffects = new SoundEffects(context);
+        jsonHandler = new JsonHandler(context);
     }
 
     @Override
@@ -82,19 +86,40 @@ public class CoinGenerator extends Entity {
         // teacher: One line if statmenets are not really recommended.
         if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING) return;
 
+
         lastTimeTouched = tickRate;
 
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
-        for (int i = coins.size()-1 ; i > -1 ; i--) {
-            // teacher: Can you simplify the conditions inside if.
-            if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
-                    && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
-                Log.d("extra_info", "Silver removed");
-                soundEffects.playCoinSound();
-                coins.remove(i);
-                game.updateTextView();
-                return;
+        if(event.getAction() == MotionEvent.ACTION_MOVE) {
+            for (int i = coins.size() - 1; i > -1; i--) {
+                // teacher: Can you simplify the conditions inside if.
+                if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+                        && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    Log.d("extra_info", "Silver removed");
+                    soundEffects.playCoinSound();
+                    coins.remove(i);
+                    Save save = new Save();
+                    save = save.getInstance();
+                    save.setCoins(game.getCoinsEarned());
+                    game.updateTextView();
+                    return;
+                }
+            }
+        }else if(event.getAction() == MotionEvent.ACTION_DOWN){
+            for (int i = coins.size() - 1; i > -1; i--) {
+                // teacher: Can you simplify the conditions inside if.
+                if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+                        && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                    Log.d("extra_info", "Silver removed");
+                    soundEffects.playCoinSound();
+                    coins.remove(i);
+                    Save save = new Save();
+                    save = save.getInstance();
+                    save.setCoins(game.getCoinsEarned());
+                    game.updateTextView();
+                    return;
+                }
             }
         }
     }
@@ -112,4 +137,11 @@ public class CoinGenerator extends Entity {
         return (float) (Math.random() * difference) + from;
     }
 
+    public void setNUMBER_OF_COINS(int NUMBER_OF_COINS) {
+        this.NUMBER_OF_COINS = NUMBER_OF_COINS;
+    }
+
+    public int getNUMBER_OF_COINS() {
+        return NUMBER_OF_COINS;
+    }
 }

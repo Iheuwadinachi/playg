@@ -11,6 +11,7 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
 public class Lumberjack extends Entity {
@@ -43,7 +44,7 @@ public class Lumberjack extends Entity {
         touchesToDestroy = 5;
         leftTouchesToDestroy = touchesToDestroy;
         //context = game.getGameActivity().getApplicationContext();
-        context = game.getGameActivity().getBaseContext();
+        context = GlobalApplication.getAppContext();//game.getGameActivity().getBaseContext();
         soundEffects = new SoundEffects(context);
     }
 
@@ -134,8 +135,12 @@ public class Lumberjack extends Entity {
                 gv.drawBitmap(bitmap[3], extraLeft-3f, top, extraWidth, height);
                 break;
         }
+    }
 
 
+    public void setContext(Context context) {
+        this.context = context;
+        soundEffects = new SoundEffects(context);
     }
 }
 
