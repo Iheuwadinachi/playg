@@ -127,6 +127,7 @@
         android:layout_marginEnd="56dp"
         android:checked="true"
         android:fontFamily="serif"
+        android:onClick="nightMode"
         android:textOff="OFF"
         android:textOn="ON"
         android:textSize="30sp"
