@@ -36,7 +36,12 @@ public class TreeGenerator extends Entity {
 
         Log.d("extra_info","Tree x axis is: " + TREE_X_AXIS + ", Y axis is: " + TREE_Y_AXIS_FINISH);
 
+        generateTreeElement();
+    }
+
+    private void generateTreeElement(){
         float y = TREE_Y_AXIS_FINISH;
+        //Resolved
         // Teacher: better to have a separate method that generate tree elements.
         for (int i = 0; i <= LOGS_AMOUNT; i++) {
             TreeElement log = new TreeElement();
@@ -51,7 +56,6 @@ public class TreeGenerator extends Entity {
             Log.i("extra_info", "Coordinates " + i + ") X:" + TREE_X_AXIS + ", Y: " + y);
             y -= logSize;
         }
-
     }
 
     @Override
@@ -110,11 +114,10 @@ public class TreeGenerator extends Entity {
             for (int i = 0; i < LOGS_AMOUNT; i++) {
                 for (int j = 0; j < 5; j++) {
                     logs.get(i).position.y += 4f;
-                    customsleep(30);
+                    customSleep(30);
                 }
-                customsleep(70);
+                customSleep(70);
             }
-
             TreeElement element = new TreeElement();
             element.position.x = TREE_X_AXIS;
             element.position.y = logs.get(logs.size()-1).position.y-20f;
@@ -122,7 +125,7 @@ public class TreeGenerator extends Entity {
             logs.add(element);
         }
 
-        private void customsleep(int millis){
+        private void customSleep(int millis){
             try {
                 sleep(millis);
             } catch (InterruptedException e) {
