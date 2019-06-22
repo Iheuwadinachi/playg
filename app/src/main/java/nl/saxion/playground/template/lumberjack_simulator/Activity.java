@@ -11,6 +11,7 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
+import nl.saxion.playground.template.lumberjack_simulator.store.BuyView;
 
 public class Activity extends AppCompatActivity {
 //teacher:
@@ -30,37 +31,19 @@ public class Activity extends AppCompatActivity {
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
 
-
-
         gameView = findViewById(R.id.lumberView33);
 
         buyView = findViewById(R.id.buy_view);
 
-
-
         coinIndicator = findViewById(R.id.coins);
 
-        // If a running game has been serialized (because it has been paused for
-        // a long time, or because of an orientation change), recreate the Game
-        // object from the serialized bundle.
-//        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
-//            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
-//                    getSerializable("game");
-//            game.setGameActivity(this);
-//        } else {
-//            game = new Game(this);
-//        }
-
         game = new Game(this);
-
-
 
         DataWrapper dataWrapper = new DataWrapper();
         dataWrapper = dataWrapper.getInstance();
 
         int coins = dataWrapper.getCoins();
         game.setCoinsEarned(coins);
-
 
         buyView.transparent("invisible");
         buyView.setGame(game);
@@ -86,13 +69,9 @@ public class Activity extends AppCompatActivity {
         REMOVE_ME++;
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-//      outState.putSerializable("game", game);
-
     }
 
     @Override
@@ -111,6 +90,5 @@ public class Activity extends AppCompatActivity {
         jsonHandler.saveConstants();
         gameView.setGame(null);
         super.onPause();
-
     }
 }

@@ -16,8 +16,6 @@ public class Vector {
     }
 
     public boolean ifNumbersAreZero(){
-        if(x > 0.1f & x < -0.1f && y > 0.1f & y < -0.1f){
-            return false;
-        } else return true;
+        return !(x > 0.1f & x < -0.1f) || !(y > 0.1f & y < -0.1f);
     }
 }

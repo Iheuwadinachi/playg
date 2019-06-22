@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <nl.saxion.playground.template.lumberjack_simulator.BuyView
+    <nl.saxion.playground.template.lumberjack_simulator.store.BuyView
         android:id="@+id/buy_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone">
 
-    </nl.saxion.playground.template.lumberjack_simulator.BuyView>
+    </nl.saxion.playground.template.lumberjack_simulator.store.BuyView>
 
     <TextView
         android:id="@+id/coins"

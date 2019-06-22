@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator.local_lib;
+package nl.saxion.playground.template.lumberjack_simulator.store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ public class Price {
     private List<Integer> risingPrices;
 
     private  double multiply = 5;
-    private  double decrease_multiply = 0.4;
 
     private int priceCounter = -1;
 
@@ -29,6 +28,7 @@ public class Price {
             if(multiply < 2) {
                 multiply = 1.9;
             }
+            double decrease_multiply = 0.4;
             risingPrices.add((int) (startPrice * (multiply - decrease_multiply)));
             multiply -= decrease_multiply;
             startPrice = (int) (startPrice * (multiply - decrease_multiply));

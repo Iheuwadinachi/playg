@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.store;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
-import nl.saxion.playground.template.lumberjack_simulator.local_lib.Price;
 
 /**
  * @author Mark is too lazy to do any comments here right now.
@@ -43,10 +43,6 @@ public class BuyView extends RelativeLayout {
     private Game game;
 
     private Price[] prices;
-
-//    private double[] priceIncreasement;
-//    private byte[] indexOfPriceIncreasement;
-    private byte NUMBER_OF_UPDATES = 4;
 
     public BuyView(Context context) {
         super(context);
@@ -78,6 +74,9 @@ public class BuyView extends RelativeLayout {
         buyChainsaw = findViewById(R.id.priceChainsawAxe);
         buyFuel = findViewById(R.id.priceFuel);
 
+        //    private double[] priceIncreasement;
+        //    private byte[] indexOfPriceIncreasement;
+        byte NUMBER_OF_UPDATES = 4;
         prices = new Price[NUMBER_OF_UPDATES];
 
         buyNewCoin.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +104,7 @@ public class BuyView extends RelativeLayout {
         try {
             currentPrice = Integer.parseInt(buyNewCoin.getText().toString());
         } catch (NumberFormatException e) {
-            makeToast("This was maximum upgraded",0);
+            makeToast("This was maximum upgraded");
             return;
         }
 
@@ -119,28 +118,31 @@ public class BuyView extends RelativeLayout {
             game.addCoinToSpawn();
             Log.d("extra_info", "Bought new coin");
         } else {
-            makeToast("Not enought coins", 0);
+            makeToast("Not enough coins");
         }
     }
 
-    private void makeToast(String text, int duration) {
-        Toast.makeText(getContext(), text, duration).show();
+    private void makeToast(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
     }
 
     public void transparent(String command) {
         String proceed = command.toLowerCase();
 
-        if (proceed.equals("visible")) {
-            setVisibility(VISIBLE);
-            Log.d("extra_info", "VISIBLE BUY VIEW");
-        } else if (proceed.equals("invisible")) {
-            setVisibility(INVISIBLE);
-            Log.d("extra_info", "INVISIBLE BUY VIEW");
-        } else if (proceed.equals("gone")) {
-            setVisibility(GONE);
-            Log.d("extra_info", "GONE BUY VIEW");
+        switch (proceed) {
+            case "visible":
+                setVisibility(VISIBLE);
+                Log.d("extra_info", "VISIBLE BUY VIEW");
+                break;
+            case "invisible":
+                setVisibility(INVISIBLE);
+                Log.d("extra_info", "INVISIBLE BUY VIEW");
+                break;
+            case "gone":
+                setVisibility(GONE);
+                Log.d("extra_info", "GONE BUY VIEW");
+                break;
         }
-
     }
 
     public void setPrices(Price[] prices) {

@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.entities;
 
 import android.util.Log;
 
@@ -7,6 +7,7 @@ import java.util.List;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 
 public class TreeGenerator extends Entity {
 // Teacher: unused fields.
@@ -17,9 +18,9 @@ public class TreeGenerator extends Entity {
 
     private boolean addNewLog;
 
-    public static float TREE_Y_AXIS_FINISH;
+    static float TREE_Y_AXIS_FINISH;
 
-    public static float TREE_X_AXIS;
+    static float TREE_X_AXIS;
 
     private static final byte LOGS_AMOUNT = 6;
 
@@ -38,7 +39,7 @@ public class TreeGenerator extends Entity {
         float y = TREE_Y_AXIS_FINISH;
         // Teacher: better to have a separate method that generate tree elements.
         for (int i = 0; i <= LOGS_AMOUNT; i++) {
-            TreeElement log = new TreeElement(game);
+            TreeElement log = new TreeElement();
 
             float logSize = 20f;
 
@@ -96,7 +97,7 @@ public class TreeGenerator extends Entity {
             element.draw(gv);
         }
 
-        TreeElement bottomBlock = new TreeElement(game);
+        TreeElement bottomBlock = new TreeElement();
         bottomBlock.position.x = TREE_X_AXIS;
         bottomBlock.position.y = TREE_Y_AXIS_FINISH + 20f;
         bottomBlock.draw(gv);
@@ -114,7 +115,7 @@ public class TreeGenerator extends Entity {
                 customsleep(70);
             }
 
-            TreeElement element = new TreeElement(game);
+            TreeElement element = new TreeElement();
             element.position.x = TREE_X_AXIS;
             element.position.y = logs.get(logs.size()-1).position.y-20f;
 

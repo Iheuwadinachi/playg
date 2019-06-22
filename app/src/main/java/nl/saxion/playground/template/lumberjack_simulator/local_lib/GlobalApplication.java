@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator.utility;
+package nl.saxion.playground.template.lumberjack_simulator.local_lib;
 
 import android.app.Application;
 import android.content.Context;
