@@ -9,7 +9,7 @@ import java.util.List;
 
 import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
-import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
+import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
 import nl.saxion.playground.template.lib.Entity;

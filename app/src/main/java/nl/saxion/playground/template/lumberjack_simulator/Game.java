@@ -7,6 +7,7 @@ import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.entities.Background;
 import nl.saxion.playground.template.lumberjack_simulator.entities.CoinGenerator;
 import nl.saxion.playground.template.lumberjack_simulator.entities.Lumberjack;
 import nl.saxion.playground.template.lumberjack_simulator.entities.TreeGenerator;
@@ -68,7 +69,7 @@ public class Game extends GameModel {
         gameActivity = activity;
     }
 
-    void setCoinsEarned(int coinsEarned) {
+    public void setCoinsEarned(int coinsEarned) {
         this.coinsEarned = coinsEarned - 1;
 
         updateTextView();
@@ -101,7 +102,7 @@ public class Game extends GameModel {
         return coinsEarned;
     }
 
-    void addCoinToSpawn(){
+    public void addCoinToSpawn(){
         coinGenerator.setNUMBER_OF_COINS(coinGenerator.getNUMBER_OF_COINS()+1);
     }
 

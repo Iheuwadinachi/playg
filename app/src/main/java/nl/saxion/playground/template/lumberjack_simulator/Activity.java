@@ -11,6 +11,7 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
+import nl.saxion.playground.template.lumberjack_simulator.store.BuyView;
 
 public class Activity extends AppCompatActivity {
 //teacher:

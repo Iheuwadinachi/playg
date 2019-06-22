@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator.local_lib;
+package nl.saxion.playground.template.lumberjack_simulator.store;
 
 import java.util.ArrayList;
 import java.util.List;

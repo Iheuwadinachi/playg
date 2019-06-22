@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.store;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
-import nl.saxion.playground.template.lumberjack_simulator.local_lib.Price;
 
 /**
  * @author Mark is too lazy to do any comments here right now.

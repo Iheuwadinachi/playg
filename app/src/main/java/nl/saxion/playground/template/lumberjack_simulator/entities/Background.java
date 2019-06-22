@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.entities;
 
 import android.graphics.Bitmap;
 
@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 
 /**
  * Class for the background entity the code is lifted from one of the templates
@@ -18,7 +19,7 @@ public class Background extends Entity {
 
     private Game game;
 
-    Background(Game game) {
+    public Background(Game game) {
         this.game = game;
     }
 
