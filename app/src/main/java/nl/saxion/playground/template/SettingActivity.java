@@ -1,4 +1,14 @@
+/**
+ * [...]
+ * In addition, this class provides a settingActivity for
+ * music, sound, theme, delete and Quiting the game
+ * @author  Eleazu Onyebuchi Iheuwadinachi
+ * @version 7.07, 22/6/2019
+ */
+
 package nl.saxion.playground.template;
+
+
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +22,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.platformer.Activity;
+
+
 
 public class SettingActivity extends AppCompatActivity {
     private TextView settingsTextView, soundTextView, musicTextView;
