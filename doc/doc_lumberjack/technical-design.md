@@ -47,10 +47,239 @@ skinparam class {
     BackgroundColor<< lib >> white
 }
 
+class Constants{
+    + coins
+    + Price[]
+    + resetCoins()
+}
+
+class DataWrapper{
+    - instance
+    
+    + coins
+    + DataWrapper()
+    + getInstance()
+    + setInstance()
+    + getCoins()
+    + setCoins()
+    
+}
+
+class JsonHandler(){
+    - context
+    
+    + JsonHandler()
+    + loadConstants()
+    + saveConstants()
+}
+
+class Save {
+    - coins
+    - prices
+    - save
+    
+    + Save()
+    + getCoins()
+    + setSave()
+    + getInstance()
+    + setCoins()
+    + setPrices()
+    + getPrices()
+}
+
+class IntroActivity{
+    - startGame
+    - jsonHandler
+    
+    + onCreate()
+    + openActivity()
+}
+
+class Typewriter{
+    - mText
+    - mIndex
+    - mHandler
+    - characterAdder
+    
+    + Typewriter()
+    + animateText()
+    + setCharacterDelay()
+}
+
+class Price{
+    - maxTimesUpgrade
+    - startPrice
+    - currentPrice
+    - risingPrices
+    - multiply
+    - decrease_multiply
+    - priceCounter
+    
+    + Price()
+    + init()
+    + getNewPrice()
+    + getCurrentPrice()
+    + getPriceCounter()
+}
+
+class Vector{
+    + x
+    + y
+    
+    + Vector()
+    + ifNumbersAreZero()
+}
+
+class MusicPlayer{
+    - mediaPlayer
+    
+    + MusicPlayer()
+    + playMusic()
+    + pauseMusic()
+    + stop()
+    + stopMusic()
+}
+
+class SoundEffects{
+    - soundPool
+    - chopSounds
+    
+    + SoundEffects()
+    + playChopSound()
+    + initChopSounds()
+    + playCoinSound()
+    + initCoinSound()
+}
+
+class GlobalApplication{
+    - applicationContext
+    
+    + onCreate()
+    + getAppContext()
+}
+
+class Activity{
+    - game
+    - gameView
+    - coinIndicator
+    - buyView
+    - jsonHandler
+    - REMOVE_ME
+    
+    # onCreate()
+    + setPrices()
+    + setTextIndicator()
+    + onClick()
+    + onSaveInstanceState()
+    # onResume()
+    # onPause()
+    
+}
+
+class Background{
+    - bitmap
+    - game
+    
+    + Background()
+    + draw()
+}
+
+class BuyView{
+    - buyNewCoin
+    - buyNewAxe
+    - buyChainsaw
+    - buyFuel
+    - game
+    - prices
+    - NUMBER_OF_UPDATES
+    
+    
+    
+    + BuyView()
+    + onTouchEvent()
+    + setGame()
+    + transparent()
+    + setPrices()
+    - init()
+    - proceedBuyNewCoin()
+    - makeToast()
+    + getPrices()
+    - updateInfo()
+    
+    
+}
+class CoinElement{
+    + WIDTH
+    + HEIGHT
+    - FRAMES_PER_SECOND
+    + MIN_X_SPEED
+    - MIN_HEIGHT
+    - MAX_WIDTH
+    - doAnimation
+    - tickRate
+    - gravity
+    - MULTIPLY
+    - DELETER
+    - bouncer
+    - deBouncer
+    - airFriction
+    - inversion
+    - goRight
+    - goLeft
+    - position
+    - direction
+    
+    + CoinElement()
+    + tick()
+    + draw()
+    + setPosition()
+    + getPosition()
+    + setDirection()
+    + setUpVarriables
+    
+}
+class CoinGenerator{
+    - game
+    - soundEffects
+    - NUMBER_OF_COINS
+    - frameForCoin
+    - tickRate
+    - lastTimeTouched
+    - PERIOD_BETWEEN_COLLECTING
+    - coins
+    
+    + CoinGenerator()
+    + tick()
+    + handleTouch()
+    + draw()
+    - generateNumber()
+    + setNUMBER_OF_COINS()
+    + getNUMBER_OF_COINS()
+}
+
 class Game {
+    - coinsEarned
+    - gameActivity
+    - background
+    - treeGenerator
+    - coinGenerator
+    - lumberjack
+    - treeChopped
+    
+    + Game()
+    + start()
+    + setTreeChopped()
+    + setTreeChopped()
+    + setGameActivity()
+    + setCoinsEarned()
+    + ifTreeChopped()
+    + updateTextView()
+    + getCoinsEarned()
+    + addCoinToSpawn()
+    + getGameActivity()
     + getWidth()
     + getHeight()
-    + start()
+   
 }
 
 class MainActivity {
@@ -59,13 +288,50 @@ class MainActivity {
 
 
 class Lumberjack{
-
+    - context
+    - soundEffects
+    - width
+    - height
+    - TIME_TO_DO_ALL_ANIMATION
+    - tickRate
+    - lastTouched
+    - touched
+    - touchesToDestroy
+    - leftTouchesToDestroy
+    - bitmap
+    - game
+    - frame
+    
+    + Lumberjack()
+    + tick()
+    + handleTouch()
+    + draw()
+    + setContext()
+    
 }
 
-class Tree{
+class TreeElement{
+    + bitmap
+    + position
+    - width
+    - height
+    
+    + TreeElement()
+    + draw()
+    
 }
 
-class Background{
+class TreeGenerator{
+    - logs
+    - TREE_X_AXIS
+    - LOGS_AMOUNT
+    - game
+    
+    + TreeGenerator()
+    + tick()
+    + moveLogDown()
+    + draw()
+    
 }
 
 class Level{
