@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.entities;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
@@ -32,7 +32,6 @@ public class CoinGenerator extends Entity {
     private int PERIOD_BETWEEN_COLLECTING = 30;
 
     private List<CoinElement> coins;
-    private JsonHandler jsonHandler;
 
 
     public CoinGenerator(Game game) {
@@ -40,14 +39,13 @@ public class CoinGenerator extends Entity {
         coins = new ArrayList<>();
         Context context = GlobalApplication.getAppContext();
         soundEffects = new SoundEffects(context);
-        jsonHandler = new JsonHandler(context);
     }
 
     @Override
     public void tick() {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
-                CoinElement element = new CoinElement(game);
+                CoinElement element = new CoinElement();
                 element.setPosition(TreeGenerator.TREE_X_AXIS,80f);//TODO: Check if it don`t conflict
 
                 float directionX = generateNumber(-3, element.MIN_X_SPEED);
@@ -67,7 +65,6 @@ public class CoinGenerator extends Entity {
             }
         }
 
-
         if (tickRate < 3000) tickRate++;
         else {
             tickRate = 0;
@@ -83,10 +80,9 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
-        // teacher: One line if statmenets are not really recommended.
-        if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING) return;
-
-
+        if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING){
+            return;
+        }
         lastTimeTouched = tickRate;
 
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);

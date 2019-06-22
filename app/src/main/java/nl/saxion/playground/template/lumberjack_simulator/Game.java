@@ -7,7 +7,9 @@ import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
+import nl.saxion.playground.template.lumberjack_simulator.entities.CoinGenerator;
+import nl.saxion.playground.template.lumberjack_simulator.entities.Lumberjack;
+import nl.saxion.playground.template.lumberjack_simulator.entities.TreeGenerator;
 
 // teacher: This class has only default constructor which means game object can be created anywhere
 // in the app which is dangerous. gameActvitiy might remain null in this case leading
@@ -18,10 +20,7 @@ public class Game extends GameModel {
 
     private Activity gameActivity;
 
-    private Background background;
-    private TreeGenerator treeGenerator;
     private CoinGenerator coinGenerator;
-    private Lumberjack lumberjack;
 
 
     private Map<Entity,Boolean> treeChopped;
@@ -34,16 +33,16 @@ public class Game extends GameModel {
     public void start() {
         treeChopped = new HashMap<>();
 
-        background = new Background(this);
+        Background background = new Background(this);
         addEntity(background);
 
-        treeGenerator = new TreeGenerator(this);
+        TreeGenerator treeGenerator = new TreeGenerator(this);
         addEntity(treeGenerator);
 
         coinGenerator = new CoinGenerator(this);
         addEntity(coinGenerator);
 
-        lumberjack = new Lumberjack(this);
+        Lumberjack lumberjack = new Lumberjack(this);
         addEntity(lumberjack);
 
         treeChopped.put(treeGenerator,false);
@@ -55,13 +54,13 @@ public class Game extends GameModel {
         Log.d("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }
 
-    void setTreeChopped(boolean chopped){
+   public void setTreeChopped(boolean chopped){
         for (Entity entity : treeChopped.keySet()){
             treeChopped.put(entity,chopped);
         }
     }
 
-    void setTreeChopped(boolean chopped, Entity entity){
+    public void setTreeChopped(boolean chopped, Entity entity){
         treeChopped.put(entity,chopped);
     }
 
@@ -69,7 +68,7 @@ public class Game extends GameModel {
         gameActivity = activity;
     }
 
-    public void setCoinsEarned(int coinsEarned) {
+    void setCoinsEarned(int coinsEarned) {
         this.coinsEarned = coinsEarned - 1;
 
         updateTextView();
@@ -80,7 +79,7 @@ public class Game extends GameModel {
 
     //RESOLVED
 
-    boolean ifTreeChopped(Entity entity){
+    public boolean ifTreeChopped(Entity entity){
         try {
             return treeChopped.get(entity);
         } catch (NullPointerException e){
@@ -90,7 +89,7 @@ public class Game extends GameModel {
         }
     }
 
-    void updateTextView(){
+    public void updateTextView(){
         coinsEarned++;
 
         if(gameActivity != null) {

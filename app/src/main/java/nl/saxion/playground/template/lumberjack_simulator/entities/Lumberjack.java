@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.entities;
 
 
 
@@ -11,6 +11,7 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.utility.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
@@ -19,8 +20,6 @@ public class Lumberjack extends Entity {
 
     private Context context;
     private SoundEffects soundEffects;
-    private final float width = 20f;
-    private final float height = 35f;
 
     private static final double TIME_TO_DO_ALL_ANIMATION = 60;
 
@@ -96,7 +95,6 @@ public class Lumberjack extends Entity {
                 Log.i("events", tickRate + ") Button is banned and was not procedured");
             }
         }
-
     }
 
     @Override
@@ -117,10 +115,12 @@ public class Lumberjack extends Entity {
         float left = 0.6f * game.getWidth();
         float top = TreeGenerator.TREE_Y_AXIS_FINISH + 5f;//previously it was 0.5, then 0.53f
 
+        float width = 20f;
         float extraWidth = width + 35f;
 
         float extraLeft = left - 18f;
 
+        float height = 35f;
         switch (frame){
             case 0:
                 gv.drawBitmap(bitmap[0], left, top, width, height, 0);
@@ -136,7 +136,6 @@ public class Lumberjack extends Entity {
                 break;
         }
     }
-
 
     public void setContext(Context context) {
         this.context = context;

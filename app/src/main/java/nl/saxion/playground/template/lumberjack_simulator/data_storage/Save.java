@@ -41,7 +41,7 @@ public class Save {
         this.prices = prices;
     }
 
-    public Price[] getPrices() {
+    Price[] getPrices() {
         return prices;
     }
 }

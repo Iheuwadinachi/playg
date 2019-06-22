@@ -44,5 +44,4 @@ public class Typewriter extends TextView {
     public void setCharacterDelay(long millis) {
         mDelay = millis;
     }
-
 }

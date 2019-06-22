@@ -1,7 +1,7 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
+
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.Entity;

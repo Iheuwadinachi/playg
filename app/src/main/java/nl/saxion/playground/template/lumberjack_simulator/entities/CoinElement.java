@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.entities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,12 +13,12 @@ public class CoinElement extends Entity {
 
     private Bitmap[] bitmap;
 
-    public static final float WIDTH = 8f;
-    public static final float HEIGHT = 13f;
+    static final float WIDTH = 8f;
+    static final float HEIGHT = 13f;
 
     private static final int FRAMES_PER_SECOND = 15;
 
-    public final float MIN_X_SPEED = 0.4f;
+    final float MIN_X_SPEED = 0.4f;
 
     private float MAX_HEIGHT = TreeGenerator.TREE_Y_AXIS_FINISH + 30f; // +2 wooden blocks
     private final float MAX_WIDTH = TreeGenerator.TREE_X_AXIS - 5f;
@@ -28,12 +28,7 @@ public class CoinElement extends Entity {
     private int tickRate = 0;
 
     private float gravity = 1;
-    private static float MULTIPLY = 1.20f;
-    private static float DELETER = 0.7f;
     private float bouncer = -2.5f;
-
-    private float deBouncer = 0.5f;
-    private float airFriction = 0.02f;
 
     private boolean inversion = false;
 
@@ -43,12 +38,9 @@ public class CoinElement extends Entity {
     private Vector position;
     private Vector direction;
 
-    private Game game;
-
-    public CoinElement(Game game) {
+    CoinElement() {
         position = new Vector();
 
-        this.game = game;
         bitmap = new Bitmap[8];
     }
 // teacher: The function is too big try making it simple.
@@ -62,13 +54,16 @@ public class CoinElement extends Entity {
                 position.x += direction.x;
 
                 if (inversion) { //If coin bounced from ground, it jumps upwards
+                    float DELETER = 0.7f;
                     direction.y = gravity * DELETER;
                     gravity = gravity * DELETER;
                 } else {
+                    float MULTIPLY = 1.20f;
                     direction.y = gravity * MULTIPLY;
                     gravity = gravity * MULTIPLY;
                 }
 
+                float airFriction = 0.02f;
                 if(goRight){
                     direction.x -= airFriction;
                     if(direction.x < MIN_X_SPEED) {
@@ -95,6 +90,7 @@ public class CoinElement extends Entity {
                     position.x = MAX_WIDTH;
                     direction.x = Math.abs(direction.x);
                     direction.x = direction.x * -1;
+                    float deBouncer = 0.5f;
                     direction.x += deBouncer;
                     goLeft = true;
                     goRight = false;
@@ -202,7 +198,7 @@ public class CoinElement extends Entity {
 //            }
 
 
-    public void draw(GameView gv, int frame) {
+    void draw(GameView gv, int frame) {
 
         if (bitmap[0] == null) {
             int[] resources = {R.drawable.silver_coin1, R.drawable.silver_coin2, R.drawable.silver_coin3,
@@ -217,16 +213,16 @@ public class CoinElement extends Entity {
         gv.drawBitmap(bitmap[frame], position.x, position.y, WIDTH, HEIGHT);
     }
 
-    public void setPosition(float x, float y) {
+    void setPosition(float x, float y) {
         position.x = x;
         position.y = y;
     }
 
-    public Vector getPosition() {
+    Vector getPosition() {
         return position;
     }
 
-    public void setDirection(Vector direction) {
+    void setDirection(Vector direction) {
         this.direction = direction;
         setUpVarriables();
     }
