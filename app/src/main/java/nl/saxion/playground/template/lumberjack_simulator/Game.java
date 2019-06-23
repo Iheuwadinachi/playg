@@ -74,14 +74,12 @@ public class Game extends GameModel {
 
     public void setCoinsEarned(int coinsEarned) {
         this.coinsEarned = coinsEarned - 1;
-
         updateTextView();
     }
 
 // Teacher: using object class and type checking is not the best wy to do it. Secondly, never use
 //  0 as object name since it is hard to distinguish it from o.
 
-    //RESOLVED
 
     public boolean ifTreeChopped(Entity entity) {
         try {

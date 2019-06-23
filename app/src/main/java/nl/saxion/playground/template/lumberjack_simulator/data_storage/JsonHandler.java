@@ -27,7 +27,9 @@ public class JsonHandler {
         try {
             reader = new FileReader(file);
             Gson gson = new Gson();
-            Save save = gson.fromJson(reader, Save.class);
+            Save.setInstance(gson.fromJson(reader, Save.class));
+
+            Save save = Save.getInstance();
 
             /**
              * Load Save into Constants
@@ -47,8 +49,7 @@ public class JsonHandler {
     }
 
     public void saveConstants() {
-        Save save = new Save();
-        save = save.getInstance();
+        Save save = Save.getInstance();
         String jsonString = new Gson().toJson(save, Save.class);
         FileOutputStream outputStream = null;
         File file = new File(context.getFilesDir() + "/save.json");

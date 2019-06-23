@@ -1,6 +1,7 @@
 package nl.saxion.playground.template.lumberjack_simulator.data_storage;
 
-import nl.saxion.playground.template.lumberjack_simulator.local_lib.Price;
+
+import nl.saxion.playground.template.lumberjack_simulator.store.Price;
 
 /**
  * @author Mark Kravchuk

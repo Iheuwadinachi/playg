@@ -93,13 +93,6 @@ public class BuyView extends RelativeLayout {
 
     }
 
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
-
     public void setGame(Game game) {
         this.game = game;
     }
@@ -110,16 +103,19 @@ public class BuyView extends RelativeLayout {
         //if was max upgrade
         if(currentPrice == -1){
             makeToast("This was maximum upgraded",0);
+            buyNewCoin.setText("-");
             return;
         }
 
         if (game.getCoinsEarned() >= currentPrice) {
             if(prices[0] == null) prices[0] = new Price(10,15);
             game.setCoinsEarned(game.getCoinsEarned() - currentPrice);
+            //ask game to add coin for spawning coins
             game.addCoinToSpawn();
+            buyNewCoin.setText(prices[0].getNewPrice());
             Log.d("extra_info", "Bought new coin");
         } else {
-            makeToast("Not enought coins", 0);
+            makeToast("Not enough coins", 0);
         }
     }
 
@@ -129,11 +125,12 @@ public class BuyView extends RelativeLayout {
         //if was max upgrade
         if(currentPrice == -1){
             makeToast("This was maximum upgraded",0);
+            buyNewAxe.setText("-");
             return;
         }
 
         if (game.getCoinsEarned() >= currentPrice) {
-            if(prices[1] == null) prices[1] = new Price(10,15,7);
+            if(prices[1] == null) prices[1] = new Price(10,2,4);
             game.setCoinsEarned(game.getCoinsEarned() - currentPrice);
             buyNewAxe.setText(prices[1].getNewPrice());
             //ask game to change lumberjack Axe
@@ -211,12 +208,14 @@ public class BuyView extends RelativeLayout {
                 buyNewCoin.setText(prices[0].getCurrentPrice());
             }
             //set lumberjack Axe Level from file
-            if(prices[1] != null){{
+            if(prices[1] != null){
                 for (int i = 0; i < prices[1].getPriceCounter(); i++) {
                     game.setLumberjackDisplayNewAxe();
                 }
                 buyNewAxe.setText(prices[1].getCurrentPrice());
-            }}
+            } else {
+                prices[1] = new Price(10,2,4);
+            }
         } catch (NullPointerException e){
             e.printStackTrace();
         }

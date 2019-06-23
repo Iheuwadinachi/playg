@@ -74,12 +74,6 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 musicPlayer.stop();
                 openActivity();
-                jsonHandler = new JsonHandler(getApplicationContext());
-                jsonHandler.loadConstants();
-                DataWrapper dataWrapper = new DataWrapper();
-                dataWrapper.setInstance(dataWrapper);
-                dataWrapper.setCoins(Constants.coins);
-                musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);
             }
         });
 

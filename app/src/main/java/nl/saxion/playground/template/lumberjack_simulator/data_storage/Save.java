@@ -18,7 +18,7 @@ public class Save {
     }
 
     public Save() {
-        this.coins = Constants.coins;
+
     }
 
     public int getCoins() {
@@ -29,8 +29,12 @@ public class Save {
         Save.save = save;
     }
 
-    public Save getInstance(){
+    public static Save getInstance(){
         return save;
+    }
+
+    public static void setInstance(Save instance){
+        save = instance;
     }
 
     public void setCoins(int coins) {
@@ -41,7 +45,7 @@ public class Save {
         this.prices = prices;
     }
 
-    Price[] getPrices() {
+    public Price[] getPrices() {
         return prices;
     }
 }

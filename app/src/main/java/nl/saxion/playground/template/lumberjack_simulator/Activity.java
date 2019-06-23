@@ -31,7 +31,8 @@ public class Activity extends AppCompatActivity {
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
 
-
+        jsonHandler = new JsonHandler(getApplicationContext());
+        jsonHandler.loadConstants();
 
         gameView = findViewById(R.id.lumberView33);
 
@@ -39,23 +40,9 @@ public class Activity extends AppCompatActivity {
 
         coinIndicator = findViewById(R.id.coins);
 
-        // If a running game has been serialized (because it has been paused for
-        // a long time, or because of an orientation change), recreate the Game
-        // object from the serialized bundle.
-//        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
-//            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
-//                    getSerializable("game");
-//            game.setGameActivity(this);
-//        } else {
-//            game = new Game(this);
-//        }
-
         game = new Game(this);
-
-        DataWrapper dataWrapper = new DataWrapper();
-        dataWrapper = dataWrapper.getInstance();
-
-        int coins = dataWrapper.getCoins();
+        Save save = Save.getInstance();
+        int coins = save.getCoins();
         game.setCoinsEarned(coins);
 
 
@@ -66,11 +53,11 @@ public class Activity extends AppCompatActivity {
         gameView.setGame(game);
     }
 
-    void setPrices(){
-        buyView.setPrices(Constants.prices);
+    public void setPrices(){
+        buyView.setPrices(Save.getInstance().getPrices());
     }
 
-    void setTextIndicator(int coins){
+    public void setTextIndicator(int coins){
         coinIndicator.setText("Coins: " + coins);
     }
 
@@ -111,9 +98,8 @@ public class Activity extends AppCompatActivity {
     }
 
     private void save(){
-        Save save = new Save();
-        save = save.getInstance();
-        save.setPrices(buyView.getPrices());
+        Save.getInstance().setCoins(game.getCoinsEarned());
+        Save.getInstance().setPrices(buyView.getPrices());
         jsonHandler.saveConstants();
     }
 }

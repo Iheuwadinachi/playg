@@ -12,14 +12,15 @@ public class Price {
 
     private List<Integer> risingPrices;
 
-    private  double multiply = 5;
+    private double multiply;
 
-    private int priceCounter = -1;
+    private int priceCounter;
 
     public Price(int startPrice, int maxTimeUpgrade){
         this.startPrice = startPrice;
         this.maxTimesUpgrade = maxTimeUpgrade;
         risingPrices = new ArrayList<>();
+        multiply = 5;
         init();
     }
 
@@ -41,22 +42,21 @@ public class Price {
             multiply -= decrease_multiply;
             startPrice = (int) (startPrice * (multiply - decrease_multiply));
         }
-
-
     }
 
     public String getNewPrice(){
-        priceCounter++;
         if(priceCounter >= risingPrices.size()) return "-";
         currentPrice = Integer.toString(risingPrices.get(priceCounter));
+        priceCounter++;
         return currentPrice;
     }
 
     public String getCurrentPrice() {
+        if(currentPrice == null) currentPrice = Integer.toString(risingPrices.get(priceCounter));
         return currentPrice;
     }
 
     public int getPriceCounter() {
-        return priceCounter + 1;
+        return priceCounter;
     }
 }
