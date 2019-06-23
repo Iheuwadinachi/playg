@@ -2,6 +2,7 @@ package nl.saxion.playground.template.lumberjack_simulator;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +50,9 @@ public class BuyView extends RelativeLayout {
     private byte NUMBER_OF_UPDATES = 4;
 
     public BuyView(Context context) {
+
         super(context);
+        setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
         init();
     }
 
@@ -101,6 +104,7 @@ public class BuyView extends RelativeLayout {
     }
 
     private void proceedBuyNewCoin() {
+
         int currentPrice;
         try {
             currentPrice = Integer.parseInt(buyNewCoin.getText().toString());
@@ -119,7 +123,7 @@ public class BuyView extends RelativeLayout {
             game.addCoinToSpawn();
             Log.d("extra_info", "Bought new coin");
         } else {
-            makeToast("Not enought coins", 0);
+            makeToast("Not enough coins", 0);
         }
     }
 

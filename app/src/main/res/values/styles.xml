@@ -11,4 +11,6 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="LoadingTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+    </style>
 </resources>

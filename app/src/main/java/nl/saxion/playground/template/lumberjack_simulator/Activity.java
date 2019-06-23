@@ -1,5 +1,6 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
+import nl.saxion.playground.template.lumberjack_simulator.settings.SettingActivity;
 
 public class Activity extends AppCompatActivity {
 //teacher:
@@ -29,8 +31,6 @@ public class Activity extends AppCompatActivity {
         // In this example, we don't require a Layout or any other Android Views than
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
-
-
 
         gameView = findViewById(R.id.lumberView33);
 
@@ -67,6 +67,9 @@ public class Activity extends AppCompatActivity {
 
         game.setGameActivity(this);
         gameView.setGame(game);
+
+
+
     }
 
     void setPrices(){
@@ -112,5 +115,10 @@ public class Activity extends AppCompatActivity {
         gameView.setGame(null);
         super.onPause();
 
+    }
+
+    public void onBackPressed()
+    {
+        this.startActivity(new Intent(this, SettingActivity.class));
     }
 }

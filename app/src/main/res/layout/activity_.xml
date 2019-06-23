@@ -45,7 +45,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="Coins: "
-        android:textColor="@android:color/white"
+        android:fontFamily="@font/disposable_droid_bb"
+        android:textColor="#ffcc00"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/lumberView33"
         app:layout_constraintTop_toTopOf="@+id/lumberView33" />
@@ -58,6 +59,6 @@
         android:layout_margin="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shop_button" />
+        app:srcCompat="@drawable/shop_button_states" />
 
 </android.support.constraint.ConstraintLayout>
