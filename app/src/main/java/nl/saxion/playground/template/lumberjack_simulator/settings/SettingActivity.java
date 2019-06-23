@@ -1,35 +1,30 @@
 package nl.saxion.playground.template.lumberjack_simulator.settings;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
-import nl.saxion.playground.template.lumberjack_simulator.Background;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.intro.IntroActivity;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
-import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
 
 public class SettingActivity extends AppCompatActivity {
     private TextView settingsTextView, soundTextView, musicTextView;
 
-    private android.support.v7.widget.SwitchCompat soundSwitch;
     private Switch themeSwitch;
-    private Button btnQuitGame;
-    private Button resumeGame;
-
+    private JsonHandler jsonHandler;
 
 
     @Override
@@ -37,8 +32,23 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.settings);
+        jsonHandler = new JsonHandler(this);
+        jsonHandler.loadConstants();
+        final DataWrapper dataWrapper = new DataWrapper();
+        dataWrapper.setInstance(dataWrapper);
 
-        btnQuitGame = findViewById(R.id.quitButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataWrapper.setCoins(Constants.coins = 0);
+                //dataWrapper.setPrices(Constants.prices);
+                jsonHandler.saveConstants();
+            }
+        });
+
+
+        Button btnQuitGame = findViewById(R.id.quitButton);
         btnQuitGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +56,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        resumeGame = findViewById(R.id.resumeButton);
+        Button resumeGame = findViewById(R.id.resumeButton);
         resumeGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,13 +64,10 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-
-
-        soundSwitch = findViewById(R.id.soundSwitch);
-        android.support.v7.widget.SwitchCompat toggle = soundSwitch;
+        android.support.v7.widget.SwitchCompat toggle = findViewById(R.id.soundSwitch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean soundOn) {
-                if (soundOn){
+                if (soundOn) {
 
                     AudioManager amanager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false);
@@ -68,8 +75,7 @@ public class SettingActivity extends AppCompatActivity {
                     amanager.setStreamMute(AudioManager.STREAM_MUSIC, false);
                     amanager.setStreamMute(AudioManager.STREAM_RING, false);
                     amanager.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-                }
-                else {
+                } else {
 
                     AudioManager amanager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
@@ -105,7 +111,7 @@ public class SettingActivity extends AppCompatActivity {
         });*/
 
 
-       /* themeSwitch = findViewById(R.id.themeSwitch);*/
+        /* themeSwitch = findViewById(R.id.themeSwitch);*/
     }
 
     /*public void nightMode(View view) {
@@ -147,13 +153,14 @@ public class SettingActivity extends AppCompatActivity {
     }*/
 
 
-
-    public void openActivity(){
+    public void openActivity() {
         Intent intent = new Intent(this, Activity.class);
         startActivity(intent);
     }
 
-    public void exitGame(){
+    public void exitGame() {
+        MusicPlayer musicPlayer = new MusicPlayer(this, R.raw.piano1);
+        musicPlayer.stop();
         Intent intent = new Intent(this, IntroActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
@@ -161,7 +168,4 @@ public class SettingActivity extends AppCompatActivity {
         finish();
 
     }
-
-
-
 }

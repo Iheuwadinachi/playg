@@ -24,19 +24,21 @@ public class Background extends Entity {
         this.game = game;
     }
 
-    public void draw(GameView gv){
+    public void draw(GameView gv) {
 
-        if (dayMode){
-            if (bitmap==null){
+        if (dayMode) {
+            if (bitmap == null) {
                 bitmap = gv.getBitmapFromResource(R.drawable.landscape1);
             }
-            float bgWidth = (float)bitmap.getWidth() / (float)bitmap.getHeight() * game.getHeight();
+            float bgWidth = (float) bitmap.getWidth() / (float) bitmap.getHeight() * game.getHeight();
 
-            for (int i = 0; i <= Math.ceil(game.getWidth()/bgWidth) ; i++) {
+            for (int i = 0; i <= Math.ceil(game.getWidth() / bgWidth); i++) {
                 gv.drawBitmap(bitmap, (float) i * bgWidth, 0, bgWidth, game.getHeight());
             }
         }
-        else if (!dayMode){
+    }
+        /*
+          else if (!dayMode){
             if (bitmap==null){
                 bitmap = gv.getBitmapFromResource(R.drawable.landscape2);
             }
@@ -47,8 +49,10 @@ public class Background extends Entity {
             }
         }
     }
+         */
 
-    public void setDayMode(boolean dayMode) {
-        this.dayMode = dayMode;
+
+        public void setDayMode ( boolean dayMode){
+            this.dayMode = dayMode;
+        }
     }
-}

@@ -15,7 +15,7 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.settings.SettingActivity;
 
 public class Activity extends AppCompatActivity {
-//teacher:
+    //teacher:
     private Game game;
     private GameView gameView;
     private TextView coinIndicator;
@@ -37,7 +37,6 @@ public class Activity extends AppCompatActivity {
         buyView = findViewById(R.id.buy_view);
 
 
-
         coinIndicator = findViewById(R.id.coins);
 
         // If a running game has been serialized (because it has been paused for
@@ -54,7 +53,6 @@ public class Activity extends AppCompatActivity {
         game = new Game(this);
 
 
-
         DataWrapper dataWrapper = new DataWrapper();
         dataWrapper = dataWrapper.getInstance();
 
@@ -69,19 +67,18 @@ public class Activity extends AppCompatActivity {
         gameView.setGame(game);
 
 
-
     }
 
-    void setPrices(){
+    void setPrices() {
         buyView.setPrices(Constants.prices);
     }
 
-    void setTextIndicator(int coins){
+    void setTextIndicator(int coins) {
         coinIndicator.setText("Coins: " + coins);
     }
 
     public void onClick(View v) {
-        if(REMOVE_ME % 2 == 0){
+        if (REMOVE_ME % 2 == 0) {
             buyView.transparent("visible");
         } else {
             buyView.transparent("gone");
@@ -101,6 +98,7 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        jsonHandler.loadConstants();
         gameView.setGame(game);
     }
 
@@ -117,8 +115,8 @@ public class Activity extends AppCompatActivity {
 
     }
 
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
+        jsonHandler.saveConstants();
         this.startActivity(new Intent(this, SettingActivity.class));
     }
 }
