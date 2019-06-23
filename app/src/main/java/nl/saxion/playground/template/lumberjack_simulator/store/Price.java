@@ -23,6 +23,14 @@ public class Price {
         init();
     }
 
+    public Price(int startPrice, int maxTimeUpgrade, int multiply){
+        this.startPrice = startPrice;
+        this.maxTimesUpgrade = maxTimeUpgrade;
+        this.multiply = multiply;
+        risingPrices = new ArrayList<>();
+        init();
+    }
+
     private void init(){
         for (int i = 0; i < maxTimesUpgrade; i++) {
             if(multiply < 2) {

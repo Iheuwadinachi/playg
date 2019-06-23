@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Game;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 
 /**
  * @author Mark is too lazy to do any comments here right now.
@@ -44,6 +43,8 @@ public class BuyView extends RelativeLayout {
 
     private Price[] prices;
 
+    private byte NUMBER_OF_UPDATES = 4;
+
     public BuyView(Context context) {
         super(context);
         init();
@@ -69,20 +70,24 @@ public class BuyView extends RelativeLayout {
         inflater.inflate(R.layout.activity_buy, this);
         setBackgroundColor(Color.rgb(172, 235, 152));
 
+        //setting global variables
         buyNewCoin = findViewById(R.id.priceNewCoin);
         buyNewAxe = findViewById(R.id.priceNewAxe);
         buyChainsaw = findViewById(R.id.priceChainsawAxe);
         buyFuel = findViewById(R.id.priceFuel);
 
-        //    private double[] priceIncreasement;
-        //    private byte[] indexOfPriceIncreasement;
-        byte NUMBER_OF_UPDATES = 4;
         prices = new Price[NUMBER_OF_UPDATES];
 
         buyNewCoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 proceedBuyNewCoin();
+            }
+        });
+        buyNewAxe.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                proceedBuyNewAxe();
             }
         });
 
@@ -100,49 +105,91 @@ public class BuyView extends RelativeLayout {
     }
 
     private void proceedBuyNewCoin() {
-        int currentPrice;
-        try {
-            currentPrice = Integer.parseInt(buyNewCoin.getText().toString());
-        } catch (NumberFormatException e) {
-            makeToast("This was maximum upgraded");
+        int currentPrice = getCurrentPrice(0);
+
+        //if was max upgrade
+        if(currentPrice == -1){
+            makeToast("This was maximum upgraded",0);
             return;
         }
 
         if (game.getCoinsEarned() >= currentPrice) {
             if(prices[0] == null) prices[0] = new Price(10,15);
             game.setCoinsEarned(game.getCoinsEarned() - currentPrice);
-            Save save = new Save();
-            save = save.getInstance();
-            save.setCoins(game.getCoinsEarned());
-            buyNewCoin.setText(prices[0].getNewPrice());
             game.addCoinToSpawn();
             Log.d("extra_info", "Bought new coin");
         } else {
-            makeToast("Not enough coins");
+            makeToast("Not enought coins", 0);
         }
     }
 
-    private void makeToast(String text) {
-        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+    private void proceedBuyNewAxe(){
+        int currentPrice = getCurrentPrice(1);
+
+        //if was max upgrade
+        if(currentPrice == -1){
+            makeToast("This was maximum upgraded",0);
+            return;
+        }
+
+        if (game.getCoinsEarned() >= currentPrice) {
+            if(prices[1] == null) prices[1] = new Price(10,15,7);
+            game.setCoinsEarned(game.getCoinsEarned() - currentPrice);
+            buyNewAxe.setText(prices[1].getNewPrice());
+            //ask game to change lumberjack Axe
+            game.setLumberjackDisplayNewAxe();
+            Log.d("extra_info", "Bought new axe. Lumberjack skin changed");
+        } else {
+            makeToast("Not enough coins", 0);
+        }
+
+
+    }
+
+    private int getCurrentPrice(int id){
+        int currentPrice = -1;
+        try {
+            switch (id){
+                case 0:
+                    currentPrice = Integer.parseInt(buyNewCoin.getText().toString());
+                    break;
+                case 1:
+                    currentPrice = Integer.parseInt(buyNewAxe.getText().toString());
+                    break;
+                case 2:{
+                    currentPrice = Integer.parseInt(buyChainsaw.getText().toString());
+                    break;
+                }
+                case 3:{
+                    currentPrice = Integer.parseInt(buyFuel.getText().toString());
+                    break;
+                }
+            }
+
+        } catch (NumberFormatException e) {}
+
+        return currentPrice;
+    }
+
+
+    private void makeToast(String text, int duration) {
+        Toast.makeText(getContext(), text, duration).show();
     }
 
     public void transparent(String command) {
         String proceed = command.toLowerCase();
 
-        switch (proceed) {
-            case "visible":
-                setVisibility(VISIBLE);
-                Log.d("extra_info", "VISIBLE BUY VIEW");
-                break;
-            case "invisible":
-                setVisibility(INVISIBLE);
-                Log.d("extra_info", "INVISIBLE BUY VIEW");
-                break;
-            case "gone":
-                setVisibility(GONE);
-                Log.d("extra_info", "GONE BUY VIEW");
-                break;
+        if (proceed.equals("visible")) {
+            setVisibility(VISIBLE);
+            Log.d("extra_info", "VISIBLE BUY VIEW");
+        } else if (proceed.equals("invisible")) {
+            setVisibility(INVISIBLE);
+            Log.d("extra_info", "INVISIBLE BUY VIEW");
+        } else if (proceed.equals("gone")) {
+            setVisibility(GONE);
+            Log.d("extra_info", "GONE BUY VIEW");
         }
+
     }
 
     public void setPrices(Price[] prices) {
@@ -156,12 +203,20 @@ public class BuyView extends RelativeLayout {
 
     private void updateInfo(){
         try {
+            //set amount of dropping coins from file
             if(prices[0] != null) {
                 for (int i = 0; i < prices[0].getPriceCounter(); i++) {
                     game.addCoinToSpawn();
                 }
                 buyNewCoin.setText(prices[0].getCurrentPrice());
             }
+            //set lumberjack Axe Level from file
+            if(prices[1] != null){{
+                for (int i = 0; i < prices[1].getPriceCounter(); i++) {
+                    game.setLumberjackDisplayNewAxe();
+                }
+                buyNewAxe.setText(prices[1].getCurrentPrice());
+            }}
         } catch (NullPointerException e){
             e.printStackTrace();
         }
