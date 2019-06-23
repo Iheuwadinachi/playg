@@ -22,12 +22,13 @@ import nl.saxion.playground.template.lumberjack_simulator.intro.IntroActivity;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
-
+/**
+ * @author Onyebuchi Dinachi, Jokūbas Tumasonis
+ */
 public class SettingActivity extends AppCompatActivity {
     private TextView settingsTextView, soundTextView, musicTextView;
 
     private Switch themeSwitch;
-    private JsonHandler jsonHandler;
 
     private boolean removedFile;
 
@@ -37,7 +38,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.settings);
-        jsonHandler = new JsonHandler(this);
+        JsonHandler jsonHandler = new JsonHandler(this);
         jsonHandler.loadConstants();
         final DataWrapper dataWrapper = new DataWrapper();
         dataWrapper.setInstance(dataWrapper);
@@ -163,6 +164,7 @@ public class SettingActivity extends AppCompatActivity {
         } else {
             setResult(RESULT_CANCELED);
         }
+        startActivity(new Intent(this, Activity.class));
         onBackPressed();
     }
 
@@ -174,13 +176,13 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void exitGame() {
-        MusicPlayer musicPlayer = new MusicPlayer(this, R.raw.piano1);
-        musicPlayer.stop();
-        Intent intent = new Intent(this, IntroActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
-        finish();
-
+        //problem here is that we never actually close the game
+        //Intent intent = new Intent(this, IntroActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.putExtra("EXIT", true);
+       /// startActivity(intent);
+        MusicPlayer.stop();
+        System.exit(0);
     }
 }

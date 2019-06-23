@@ -101,6 +101,7 @@ public class Activity extends AppCompatActivity {
     public void onBackPressed() {
         save();
         startActivity(new Intent(this, SettingActivity.class));
+        finish();
     }
 
 

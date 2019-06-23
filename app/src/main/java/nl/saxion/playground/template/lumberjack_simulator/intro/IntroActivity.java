@@ -14,10 +14,11 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapp
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
-
+/**
+ * @author Jokūbas Tumasonis
+ */
 public class IntroActivity extends AppCompatActivity {
 
-    private Button startGame;
     private JsonHandler jsonHandler;
     private Game game;
 
@@ -67,29 +68,24 @@ public class IntroActivity extends AppCompatActivity {
                 "We have a goldmine on our hands!\n ");
 
         musicPlayer = new MusicPlayer(this, R.raw.keyboard_typing);
-        startGame = findViewById(R.id.startGame);
+        Button startGame = findViewById(R.id.startGame);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                musicPlayer.stop();
+                MusicPlayer.stop();
                 openActivity();
+                musicPlayer = new MusicPlayer(v.getContext(), R.raw.piano1);
                 finish();
             }
         });
 
-
-        //mMediaPlayer = new MediaPlayer();
-        //mMediaPlayer = MediaPlayer.create(this, R.raw.keyboard_typing);
-        //mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        //mMediaPlayer.start();
     }
 
     public void openActivity() {
         Intent intent = new Intent(this, Activity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
-
 }
 

@@ -22,6 +22,9 @@ public class JsonHandler {
         this.context = context;
     }
 
+    /**
+     * Loads save data from Gson
+     */
     public void loadConstants() {
         FileReader reader = null;
         File file = new File(context.getFilesDir() + "/save.json");
@@ -31,10 +34,8 @@ public class JsonHandler {
             Save.setInstance(gson.fromJson(reader, Save.class));
 
             Save save = Save.getInstance();
+            //Load Save into Constants
 
-            /**
-             * Load Save into Constants
-             */
             Constants.coins = save.getCoins();
             Constants.prices = save.getPrices();
 
@@ -49,6 +50,10 @@ public class JsonHandler {
         }
     }
 
+
+    /**
+     * Saves game data in Gson format
+     */
     public void saveConstants() {
         Save save = Save.getInstance();
         String jsonString = new Gson().toJson(save, Save.class);
@@ -68,6 +73,9 @@ public class JsonHandler {
         }
     }
 
+    /**
+     * Removes game data
+     */
     public void removeData() {
         File file = new File(context.getFilesDir() + "/save.json");
 
@@ -77,5 +85,4 @@ public class JsonHandler {
             Log.d("extra_info", "File NOT REMOVED");
         }
     }
-
 }

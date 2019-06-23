@@ -55,14 +55,14 @@ public class MusicPlayer {
     /**
      * Stops music
      */
-    public void stop() {
+    public static void stop() {
         stopMusic();
     }
 
     /**
      * Logic handler to stop music
      */
-    private void stopMusic() {
+    private static void  stopMusic() {
 
         if (mediaPlayer != null) {
             mediaPlayer.release();

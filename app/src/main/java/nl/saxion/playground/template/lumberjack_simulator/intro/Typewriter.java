@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 
-
+/**
+ * @author Jokūbas Tumasonis
+ */
 public class Typewriter extends TextView {
 
     private CharSequence mText;
