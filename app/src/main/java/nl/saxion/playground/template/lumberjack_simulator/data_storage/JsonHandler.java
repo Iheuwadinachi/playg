@@ -1,6 +1,7 @@
 package nl.saxion.playground.template.lumberjack_simulator.data_storage;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -66,4 +67,15 @@ public class JsonHandler {
             }
         }
     }
+
+    public void removeData() {
+        File file = new File(context.getFilesDir() + "/save.json");
+
+        if (file.delete()) {
+            Log.d("extra_info", "File removed successfully");
+        } else {
+            Log.d("extra_info", "File NOT REMOVED");
+        }
+    }
+
 }

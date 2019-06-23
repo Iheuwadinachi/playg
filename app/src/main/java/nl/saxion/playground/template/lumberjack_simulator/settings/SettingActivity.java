@@ -10,13 +10,16 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lumberjack_simulator.Activity;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
+import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.intro.IntroActivity;
+import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
 
@@ -25,6 +28,8 @@ public class SettingActivity extends AppCompatActivity {
 
     private Switch themeSwitch;
     private JsonHandler jsonHandler;
+
+    private boolean removedFile;
 
 
     @Override
@@ -41,9 +46,7 @@ public class SettingActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataWrapper.setCoins(Constants.coins = 0);
-                //dataWrapper.setPrices(Constants.prices);
-                jsonHandler.saveConstants();
+                removeGame();
             }
         });
 
@@ -87,6 +90,8 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
        /* themeSwitch = findViewById(R.id.themeSwitch);
         Switch themeToggle = themeSwitch;
@@ -152,10 +157,20 @@ public class SettingActivity extends AppCompatActivity {
         });
     }*/
 
-
     public void openActivity() {
-        Intent intent = new Intent(this, Activity.class);
-        startActivity(intent);
+        if(removedFile) {
+            setResult(RESULT_OK);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+        onBackPressed();
+    }
+
+    public void removeGame(){
+        JsonHandler jsonHandler = new JsonHandler(GlobalApplication.getAppContext());
+        jsonHandler.removeData();
+        Toast.makeText(getApplicationContext(),"Please relaunch the game to see difference",Toast.LENGTH_LONG).show();
+        removedFile = true;
     }
 
     public void exitGame() {

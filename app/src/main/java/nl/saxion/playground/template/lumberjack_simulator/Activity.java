@@ -1,5 +1,6 @@
 package nl.saxion.playground.template.lumberjack_simulator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,9 @@ import android.widget.TextView;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
+import nl.saxion.playground.template.lumberjack_simulator.settings.SettingActivity;
 import nl.saxion.playground.template.lumberjack_simulator.store.BuyView;
 
 public class Activity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class Activity extends AppCompatActivity {
     BuyView buyView;
     private JsonHandler jsonHandler;
 
-    private static int REMOVE_ME;
+    private static int buyViewOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,9 @@ public class Activity extends AppCompatActivity {
         gameView.setGame(game);
     }
 
-    public void setPrices(){
-        buyView.setPrices(Save.getInstance().getPrices());
+    public void setPrices(boolean set){
+        if(set) buyView.setPrices(Save.getInstance().getPrices());
+        else buyView.setPrices(null);
     }
 
     public void setTextIndicator(int coins){
@@ -62,12 +63,12 @@ public class Activity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        if(REMOVE_ME % 2 == 0){
+        if(buyViewOpen % 2 == 0){
             buyView.transparent("visible");
         } else {
             buyView.transparent("gone");
         }
-        REMOVE_ME++;
+        buyViewOpen++;
     }
 
 
@@ -91,11 +92,17 @@ public class Activity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        save();
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         save();
-        gameView.setGame(null);
-        finish();
+        startActivity(new Intent(this, SettingActivity.class));
     }
+
 
     private void save(){
         Save.getInstance().setCoins(game.getCoinsEarned());

@@ -74,6 +74,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 musicPlayer.stop();
                 openActivity();
+                finish();
             }
         });
 

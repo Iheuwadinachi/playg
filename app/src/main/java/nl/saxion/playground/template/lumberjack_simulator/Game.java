@@ -53,7 +53,7 @@ public class Game extends GameModel {
         treeChopped.put(coinGenerator, false);
         treeChopped.put(lumberjack, false);
 
-        gameActivity.setPrices();
+        gameActivity.setPrices(true);
 
         Log.d("extra", "game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }

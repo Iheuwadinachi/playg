@@ -7,14 +7,13 @@
     android:background="@drawable/shop_view">
 
 
-
     <TextView
         android:id="@+id/settingsTextView"
         android:layout_width="174dp"
         android:layout_height="56dp"
-        android:layout_marginStart="94dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="51dp"
-        android:layout_marginEnd="112dp"
+        android:layout_marginEnd="8dp"
         android:background="#00141414"
         android:fontFamily="@font/disposable_droid_bb"
         android:text="SETTINGS"
@@ -31,9 +30,9 @@
         android:id="@+id/soundTextView"
         android:layout_width="146dp"
         android:layout_height="61dp"
-        android:layout_marginStart="51dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="221dp"
+        android:layout_marginEnd="8dp"
         android:background="#00141414"
         android:fontFamily="@font/disposable_droid_bb"
         android:text="SOUNDS"
@@ -43,7 +42,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsTextView"
         tools:visibility="visible" />
@@ -52,30 +51,25 @@
         android:id="@+id/soundSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="56dp"
         android:checked="true"
         android:textOff="OFF"
         android:textOn="ON"
         android:textSize="30sp"
         android:textStyle="bold"
         android:thumb="@drawable/sw_thumb"
-        app:track="@drawable/sw_thumb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/soundTextView"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
+        app:layout_constraintTop_toTopOf="@+id/soundTextView"
+        app:track="@drawable/sw_thumb" />
 
 
     <Button
         android:id="@+id/quitButton"
         android:layout_width="307dp"
         android:layout_height="60dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="207dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="48dp"
         android:background="#00141414"
         android:fontFamily="@font/disposable_droid_bb"
         android:onClick="quitGame"
@@ -86,38 +80,30 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
 
         android:id="@+id/deleteButton"
         android:layout_width="188dp"
         android:layout_height="63dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="190dp"
+        android:layout_marginTop="32dp"
         android:background="#00141414"
         android:fontFamily="@font/disposable_droid_bb"
-        android:onClick="deleteGame"
         android:text="Delete Game"
         android:textColor="@drawable/settings_color_state"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundTextView" />
+        app:layout_constraintStart_toStartOf="@+id/resumeButton"
+        app:layout_constraintTop_toBottomOf="@+id/resumeButton" />
 
     <Button
         android:id="@+id/resumeButton"
         android:layout_width="188dp"
         android:layout_height="63dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginEnd="190dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="8dp"
         android:background="#00141414"
         android:fontFamily="@font/disposable_droid_bb"
         android:onClick="resumeGame"
@@ -126,9 +112,9 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/soundTextView" />
 
 
 
