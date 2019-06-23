@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.saxion.playground.template.lumberjack_simulator.Game;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 
@@ -27,11 +26,11 @@ public class CoinGenerator extends Entity {
     private int frameForCoin = 4;
 
     private int tickRate;
-    private int lastTimeTouched;
 
-    private int PERIOD_BETWEEN_COLLECTING = 30;
+    private final int PERIOD_BETWEEN_COLLECTING = 30;
 
     private List<CoinElement> coins;
+
 
 
     public CoinGenerator(Game game) {
@@ -46,7 +45,7 @@ public class CoinGenerator extends Entity {
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement();
-                element.setPosition(TreeGenerator.TREE_X_AXIS,80f);//TODO: Check if it don`t conflict
+                element.setPosition(TreeGenerator.TREE_X_AXIS,100f);
 
                 float directionX = generateNumber(-3, element.MIN_X_SPEED);
                 float directionY = generateNumber(-7f,4f);
@@ -65,11 +64,10 @@ public class CoinGenerator extends Entity {
             }
         }
 
-        if (tickRate < 3000) tickRate++;
+
+        if (tickRate < Integer.MAX_VALUE - 5) tickRate++;
         else {
             tickRate = 0;
-            lastTimeTouched = PERIOD_BETWEEN_COLLECTING - 2;
-            lastTimeTouched *= -1;
         }
 
         for (CoinElement element : coins){
@@ -80,10 +78,7 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
-        if (tickRate - lastTimeTouched < PERIOD_BETWEEN_COLLECTING){
-            return;
-        }
-        lastTimeTouched = tickRate;
+        // teacher: One line if statmenets are not really recommended.
 
         Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
 
@@ -95,11 +90,7 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
-                    Save save = new Save();
-                    save = save.getInstance();
-                    save.setCoins(game.getCoinsEarned());
                     game.updateTextView();
-                    return;
                 }
             }
         }else if(event.getAction() == MotionEvent.ACTION_DOWN){
@@ -110,11 +101,7 @@ public class CoinGenerator extends Entity {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);
-                    Save save = new Save();
-                    save = save.getInstance();
-                    save.setCoins(game.getCoinsEarned());
                     game.updateTextView();
-                    return;
                 }
             }
         }

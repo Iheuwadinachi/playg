@@ -23,10 +23,13 @@ public class Game extends GameModel {
 
     private CoinGenerator coinGenerator;
 
+    private Background background;
+    private Lumberjack lumberjack;
+    TreeGenerator treeGenerator;
 
-    private Map<Entity,Boolean> treeChopped;
+    private Map<Entity, Boolean> treeChopped;
 
-    public Game(Activity gameActivity){
+    public Game(Activity gameActivity) {
         this.gameActivity = gameActivity;
     }
 
@@ -34,38 +37,38 @@ public class Game extends GameModel {
     public void start() {
         treeChopped = new HashMap<>();
 
-        Background background = new Background(this);
+        background = new Background(this);
         addEntity(background);
 
-        TreeGenerator treeGenerator = new TreeGenerator(this);
+        treeGenerator = new TreeGenerator(this);
         addEntity(treeGenerator);
 
         coinGenerator = new CoinGenerator(this);
         addEntity(coinGenerator);
 
-        Lumberjack lumberjack = new Lumberjack(this);
+        lumberjack = new Lumberjack(this);
         addEntity(lumberjack);
 
-        treeChopped.put(treeGenerator,false);
-        treeChopped.put(coinGenerator,false);
-        treeChopped.put(lumberjack,false);
+        treeChopped.put(treeGenerator, false);
+        treeChopped.put(coinGenerator, false);
+        treeChopped.put(lumberjack, false);
 
         gameActivity.setPrices();
 
-        Log.d("extra","game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
+        Log.d("extra", "game Width: " + getWidth() + "f, game Height: " + getHeight() + "f.");
     }
 
-   public void setTreeChopped(boolean chopped){
-        for (Entity entity : treeChopped.keySet()){
-            treeChopped.put(entity,chopped);
+    public void setTreeChopped(boolean chopped) {
+        for (Entity entity : treeChopped.keySet()) {
+            treeChopped.put(entity, chopped);
         }
     }
 
-    public void setTreeChopped(boolean chopped, Entity entity){
-        treeChopped.put(entity,chopped);
+    public void setTreeChopped(boolean chopped, Entity entity) {
+        treeChopped.put(entity, chopped);
     }
 
-    void setGameActivity(Activity activity){
+    void setGameActivity(Activity activity) {
         gameActivity = activity;
     }
 
@@ -80,48 +83,51 @@ public class Game extends GameModel {
 
     //RESOLVED
 
-    public boolean ifTreeChopped(Entity entity){
+    public boolean ifTreeChopped(Entity entity) {
         try {
             return treeChopped.get(entity);
-        } catch (NullPointerException e){
-            Log.d("extra_info","Entity non in HashMap");
+        } catch (NullPointerException e) {
+            Log.d("extra_info", "Entity non in HashMap");
             e.printStackTrace();
             return false;
         }
     }
 
-    public void updateTextView(){
+    public void updateTextView() {
         coinsEarned++;
 
-        if(gameActivity != null) {
+        if (gameActivity != null) {
             gameActivity.setTextIndicator(coinsEarned);
         }
     }
 
-    public int getCoinsEarned(){
+    public void setLumberjackDisplayNewAxe() {
+        lumberjack.displayNewAxe();
+    }
+
+    public int getCoinsEarned() {
         return coinsEarned;
     }
 
-    public void addCoinToSpawn(){
-        coinGenerator.setNUMBER_OF_COINS(coinGenerator.getNUMBER_OF_COINS()+1);
+    public void addCoinToSpawn() {
+        coinGenerator.setNUMBER_OF_COINS(coinGenerator.getNUMBER_OF_COINS() + 1);
     }
 
     @Override
     public float getWidth() {
         // Virtual screen should be at least 100 wide and 100 high.
-        return 100f * actualWidth / Math.min(actualWidth,actualHeight);
+        return 100f * actualWidth / Math.min(actualWidth, actualHeight);
     }
 
     @Override
     public float getHeight() {
         // Virtual screen should be at least 100 wide and 100 high.
-        return 100f * actualHeight / Math.min(actualWidth,actualHeight);
+        return 100f * actualHeight / Math.min(actualWidth, actualHeight);
     }
 
-    public Activity getGameActivity(){
-        return  gameActivity;
+    public Activity getGameActivity() {
+        return gameActivity;
     }
-
 
 
 }

@@ -18,9 +18,9 @@ public class TreeGenerator extends Entity {
 
     private boolean addNewLog;
 
-    static float TREE_Y_AXIS_FINISH;
+    public static float TREE_Y_AXIS_FINISH;
 
-    static float TREE_X_AXIS;
+    public static float TREE_X_AXIS;
 
     private static final byte LOGS_AMOUNT = 6;
 
@@ -32,16 +32,11 @@ public class TreeGenerator extends Entity {
         logs = new ArrayList<>();
 
         TREE_X_AXIS = game.getWidth() * 0.35f;
-        TREE_Y_AXIS_FINISH = game.getHeight() * 0.52f;
+        TREE_Y_AXIS_FINISH = game.getHeight() * 0.55f;
 
-        Log.d("extra_info","Tree x axis is: " + TREE_X_AXIS + ", Y axis is: " + TREE_Y_AXIS_FINISH);
+        Log.d("extra_info", "Tree x axis is: " + TREE_X_AXIS + ", Y axis is: " + TREE_Y_AXIS_FINISH);
 
-        generateTreeElement();
-    }
-
-    private void generateTreeElement(){
         float y = TREE_Y_AXIS_FINISH;
-        //Resolved
         // Teacher: better to have a separate method that generate tree elements.
         for (int i = 0; i <= LOGS_AMOUNT; i++) {
             TreeElement log = new TreeElement();
@@ -56,6 +51,7 @@ public class TreeGenerator extends Entity {
             Log.i("extra_info", "Coordinates " + i + ") X:" + TREE_X_AXIS + ", Y: " + y);
             y -= logSize;
         }
+
     }
 
     @Override
@@ -71,34 +67,22 @@ public class TreeGenerator extends Entity {
             addNewLog = false;
             thread.start();
             debugTreeCoordinates();
-            Log.d("extra_info","My thread works");
+            Log.d("extra_info", "My thread works");
         }
 
     }
 
-    private void debugTreeCoordinates(){
+    private void debugTreeCoordinates() {
         int counter = 0;
-        for (TreeElement element : logs){
-            Log.d("extra_info","Tree element # " + counter + " has X: " + element.position.x + " and Y: " + element.position.y);
+        for (TreeElement element : logs) {
+            Log.d("extra_info", "Tree element # " + counter + " has X: " + element.position.x + " and Y: " + element.position.y);
         }
     }
-
-//    private void moveLogDown(int index) {
-//        int counter = 0;
-//        for (TreeElement element : logs) {
-//            if (index == counter) {
-//                element.position.y += 20f;
-//                return;
-//            }
-//            counter++;
-//        }
-//    }
 
     @Override
     public void draw(GameView gv) {
-
-        for (TreeElement element : logs) {
-            element.draw(gv);
+        for (int i = 0; i < logs.size(); i++) {
+           logs.get(i).draw(gv);
         }
 
         TreeElement bottomBlock = new TreeElement();
@@ -108,28 +92,29 @@ public class TreeGenerator extends Entity {
     }
 
     //TODO: Check if it can be private
-    class TreeThread extends Thread {
+    private class TreeThread extends Thread {
         @Override
         public void run() {
             for (int i = 0; i < LOGS_AMOUNT; i++) {
                 for (int j = 0; j < 5; j++) {
                     logs.get(i).position.y += 4f;
-                    customSleep(30);
+                    customsleep(30);
                 }
-                customSleep(70);
+                customsleep(60);
             }
+
             TreeElement element = new TreeElement();
             element.position.x = TREE_X_AXIS;
-            element.position.y = logs.get(logs.size()-1).position.y-20f;
+            element.position.y = logs.get(logs.size() - 1).position.y - 20f;
 
             logs.add(element);
         }
 
-        private void customSleep(int millis){
+        private void customsleep(int millis) {
             try {
                 sleep(millis);
             } catch (InterruptedException e) {
-                Log.d("extra_info","Exception with sleep in thread");
+                Log.d("extra_info", "Exception with sleep in thread");
             }
         }
     }

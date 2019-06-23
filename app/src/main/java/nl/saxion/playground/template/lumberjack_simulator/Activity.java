@@ -31,11 +31,24 @@ public class Activity extends AppCompatActivity {
         // are custom GameCanvas.
         setContentView(R.layout.activity_);
 
+
+
         gameView = findViewById(R.id.lumberView33);
 
         buyView = findViewById(R.id.buy_view);
 
         coinIndicator = findViewById(R.id.coins);
+
+        // If a running game has been serialized (because it has been paused for
+        // a long time, or because of an orientation change), recreate the Game
+        // object from the serialized bundle.
+//        if (savedInstanceState!=null && savedInstanceState.containsKey("game")) {
+//            game = (nl.saxion.playground.template.lumberjack_simulator.Game)savedInstanceState.
+//                    getSerializable("game");
+//            game.setGameActivity(this);
+//        } else {
+//            game = new Game(this);
+//        }
 
         game = new Game(this);
 
@@ -44,6 +57,7 @@ public class Activity extends AppCompatActivity {
 
         int coins = dataWrapper.getCoins();
         game.setCoinsEarned(coins);
+
 
         buyView.transparent("invisible");
         buyView.setGame(game);
@@ -69,9 +83,11 @@ public class Activity extends AppCompatActivity {
         REMOVE_ME++;
     }
 
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
     }
 
     @Override
@@ -82,13 +98,22 @@ public class Activity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        Save save = new Save();
-        save = save.getInstance();
-
-        save.setPrices(buyView.getPrices());
-
-        jsonHandler.saveConstants();
+        save();
         gameView.setGame(null);
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        save();
+        gameView.setGame(null);
+        finish();
+    }
+
+    private void save(){
+        Save save = new Save();
+        save = save.getInstance();
+        save.setPrices(buyView.getPrices());
+        jsonHandler.saveConstants();
     }
 }
