@@ -334,9 +334,6 @@ class TreeGenerator{
     
 }
 
-class Level{
-}
-
 
 class Entity<<lib>> {
     + draw(GameView)
@@ -371,12 +368,47 @@ GameView --> GameModel
 
 Game -|> GameModel
 Game *-- Lumberjack
+Coins *-- Lumberjack
+TreeGenerator --* TreeElement
+Game *-- BuyView
+CoinGenerator --* CoinElement
+IntroActivity --* Typewriter
+TreeGenerator --* TreeElement
+MusicPlayer --* SoundEffects
+DataWrapper --* Constants
+Save --* Constants
+CoinElement --|> Vector
+CoinGenerator --|> Vector
+CoinGenerator --|> SoundEffects
+CoinGenerator --|> GameModel
+CoinGenerator --|> Save
+CoinGenerator --|> JsonHandler
+CoinGenerator --|> GlobalApplication
+TreeElement --|> Vector
+BuyView --|> Save
+BuyView --|> Price
+Activity --|> GameView
+Activity --|> Vector
+Background --|> GameView
+Constants --|> Price
+Save --|> Price
+
+
+
+
+
 
 
 Entity <|-- Lumberjack
-Entity <|-- Tree
 Entity <|-- Background
-Entity <|-- Level
+Entity <|-- TreeElement
+Entity <|-- CoinsElement
+
+
+
+
+
+
 
 
 MainActivity --> Game
@@ -452,11 +484,116 @@ In both cases, the `GameView` will arrange for the `Canvas` to be in such a stat
 
 The main character of the game
 
-### Tree
+This method displays our lumberjack with his axes.
+It produces some animation of him chopping the tree and colecting money, he is our main character of the game.
+
+### TreeElement
 One of the objects in the game
+
+This objects creates blocks of wood which are later used in TreeGenerator class, to produce an actual tree
+for our players
 
 ### Background
 Back drop for the levels
 
-### Level
-Builds the stages of the game
+Creates an image for a background view and displays it
+
+### Constants
+Stores values such as coins and upgrades 
+
+Has two parameters coins and prices[] which later on are used in the save class and then in jsonHelper 
+
+### DataWrapper
+Wraps data for updates using a json file
+
+creates an instance of that class so it could only be used once as an object
+has a method to return a coins amount.
+
+### JsonHandler
+saves data from datawrapper into a custom json file
+
+Its a json helper which we are using to save our constants, and then read them from a saved json
+file for purpose such as to display our upgrades and don't loose sensitive data
+
+### Save
+saves data for json to use
+
+Save is a pretty simple class which saves all constants and then are used in json Handler class
+
+### IntroActivity
+runs a introduction to the game, with some visuals and text
+
+- OnCreate() it creates a little black background with a help of another class it displays some text back story
+and displays some background music with possibility to skip it.
+
+### TypeWriter
+types the text for the intro activity with sound effects 
+
+TypeWritter is a helper class for Intro activity it is used to display a sound of taping the text and actual
+type engine and animation 
+
+### Price
+used for upgrading items for a lumberjack
+
+This class is one of the most difficult classes in the game, which is responsible for saving and actual doing
+upgrades on the lumberjack class. We have some prices for the coins spawn, exes.
+
+### Vector
+
+Vector class is a helper class used in different classes for math problems
+
+### MusicPlayer
+Its a globally used class for sounds of the game
+
+it has such methods in used as:
+- stopMusic() for stopping music
+- playMusic() to start playing music on different occasions 
+
+### SoundEffects
+this is a helper class for music player
+
+This one contains all the sounds for certain events in our game, such as chooping a tree
+collecting coins from the ground, type witting sound and a background music.
+
+### GlobalApplication
+this class is a helper class in need if somewhere we need to initiate application context which 
+in our case is game class
+
+### Activity 
+In this class we manage our game start and using methods such as
+
+- onPause() 
+- onResume()
+these methods are really common in the android developing, and this class declares and initiates a lot
+of different classes and passes them on onto the main activity 
+
+### BuyView
+This class represents its own name
+
+It creates a view for a in game store for upgrading characters in our case lumberjacks
+items and how many coins he produces when cutting a tree. This class is really in a relationship with 
+price class.
+
+### CoinElement
+This class represents coins in our game
+
+In this class we create a coin as an object and use it when a tree is being chopped. This class is being
+used in other class which is CoinGenerator.
+
+### CoinGenerator
+this class uses coinElement class to produce coins for cutting a tree down, coins are animated 
+we used some difficult physics elements to display them separately.
+
+### Game
+This is most important class in our game and it represents itself.
+
+In this class we initialize a lot different other objects. This class initialize the actual game and most
+of its behaviours of the first look at the game.
+
+### TreeGenerator
+This class is being used to generate a tree 
+
+Generation happens that we are using a 
+- onDraw() method which takes wood block from a treeElement class and displays 5 of them which looks like
+a tree. We implemented an animation of chopping the tree in here two so people would see after lumberjack hits the tree
+5 times it falls down    
