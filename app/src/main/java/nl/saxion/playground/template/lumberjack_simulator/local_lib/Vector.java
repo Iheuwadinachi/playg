@@ -1,5 +1,10 @@
 package nl.saxion.playground.template.lumberjack_simulator.local_lib;
 
+/**
+ * @author Mark Kravchuk
+ * Own class to store Entitie`s coordinates position
+ */
+
 public class Vector {
 
     public float x;
@@ -13,9 +18,5 @@ public class Vector {
     public Vector(){
         x = 0f;
         y = 0f;
-    }
-
-    public boolean ifNumbersAreZero(){
-        return !(x > 0.1f & x < -0.1f) || !(y > 0.1f & y < -0.1f);
     }
 }

@@ -9,50 +9,36 @@ import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lumberjack_simulator.Game;
 
-public class TreeGenerator extends Entity {
-// Teacher: unused fields.
+/**
+ * A class, which has List of tree blocks and manages them
+ * @author Mark Kravchuk
+ */
 
-    // Teacher: log in constructor, element in tick() and bottomBlock in draw() represents the same object.
-//  Since game object have not been changed in this class.  You can make it a field.
+public class TreeGenerator extends Entity {
+
     private List<TreeElement> logs;
 
     private boolean addNewLog;
-
-    public static float TREE_Y_AXIS_FINISH;
-
-    public static float TREE_X_AXIS;
+    //Other entities use this values to adjust theirs position according to tree
+    static float TREE_Y_AXIS_FINISH;
+    static float TREE_X_AXIS;
 
     private static final byte LOGS_AMOUNT = 6;
 
     private Game game;
 
-
     public TreeGenerator(Game game) {
         this.game = game;
         logs = new ArrayList<>();
-
         TREE_X_AXIS = game.getWidth() * 0.35f;
         TREE_Y_AXIS_FINISH = game.getHeight() * 0.55f;
-
-        Log.d("extra_info", "Tree x axis is: " + TREE_X_AXIS + ", Y axis is: " + TREE_Y_AXIS_FINISH);
-
-        float y = TREE_Y_AXIS_FINISH;
-        // Teacher: better to have a separate method that generate tree elements.
-        for (int i = 0; i <= LOGS_AMOUNT; i++) {
-            TreeElement log = new TreeElement();
-
-            float logSize = 20f;
-
-            log.position.x = TREE_X_AXIS;
-            log.position.y = y;
-
-            logs.add(log);
-
-            Log.i("extra_info", "Coordinates " + i + ") X:" + TREE_X_AXIS + ", Y: " + y);
-            y -= logSize;
-        }
-
+        init();
     }
+
+    /**
+     * We check if lumberjack chopped tree,
+     * so tree can destroy 1 block and make all the rest fall down
+     */
 
     @Override
     public void tick() {
@@ -61,21 +47,10 @@ public class TreeGenerator extends Entity {
             game.setTreeChopped(false, this);
             addNewLog = true;
         }
-
         if (addNewLog) {
             TreeThread thread = new TreeThread();
             addNewLog = false;
             thread.start();
-            debugTreeCoordinates();
-            Log.d("extra_info", "My thread works");
-        }
-
-    }
-
-    private void debugTreeCoordinates() {
-        int counter = 0;
-        for (TreeElement element : logs) {
-            Log.d("extra_info", "Tree element # " + counter + " has X: " + element.position.x + " and Y: " + element.position.y);
         }
     }
 
@@ -91,7 +66,29 @@ public class TreeGenerator extends Entity {
         bottomBlock.draw(gv);
     }
 
-    //TODO: Check if it can be private
+    private void init(){
+        float y = TREE_Y_AXIS_FINISH;
+
+        for (int i = 0; i <= LOGS_AMOUNT; i++) {
+            TreeElement log = new TreeElement();
+
+            float logSize = 20f;
+
+            log.position.x = TREE_X_AXIS;
+            log.position.y = y;
+
+            logs.add(log);
+
+            Log.i("extra_info", "Coordinates " + i + ") X:" + TREE_X_AXIS + ", Y: " + y);
+            y -= logSize;
+        }
+    }
+
+    /**
+     * Thread was created to make blocks of tree falling down one by one slowly
+     * making this process visible for user in animated way.
+     */
+
     private class TreeThread extends Thread {
         @Override
         public void run() {

@@ -4,6 +4,8 @@ import nl.saxion.playground.template.lumberjack_simulator.store.Price;
 
 /**
  * @author Adomas Aleksandravicius, Michael Cornelisse
+ *
+ * Class has 1 instance of itself, where we store all information while retriving it from json file
  */
 
 public class Save {

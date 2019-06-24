@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".lumberjack_simulator.settings.SettingActivity"/>
-        <activity android:name=".lumberjack_simulator.Activity" />
-        <activity android:name=".lumberjack_simulator.intro.IntroActivity">
+        <activity android:name=".lumberjack_simulator.activity.SettingActivity"/>
+        <activity android:name=".lumberjack_simulator.activity.Activity" />
+        <activity android:name=".lumberjack_simulator.activity.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

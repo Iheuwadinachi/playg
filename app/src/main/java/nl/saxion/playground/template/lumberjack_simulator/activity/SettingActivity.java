@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator.settings;
+package nl.saxion.playground.template.lumberjack_simulator.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,18 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.saxion.playground.template.R;
-import nl.saxion.playground.template.lumberjack_simulator.Activity;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Constants;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.DataWrapper;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
-import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
-import nl.saxion.playground.template.lumberjack_simulator.intro.IntroActivity;
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplication;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 
@@ -37,8 +29,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.settings);
         JsonHandler jsonHandler = new JsonHandler(this);
         jsonHandler.loadConstants();
-        final DataWrapper dataWrapper = new DataWrapper();
-        dataWrapper.setInstance(dataWrapper);
 
         Button deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {

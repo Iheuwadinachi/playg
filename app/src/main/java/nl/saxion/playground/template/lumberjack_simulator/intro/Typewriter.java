@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 /**
  * @author Jokūbas Tumasonis
+ * Class for IntroActivity to output prestory in anumated way
  */
 public class Typewriter extends TextView {
 

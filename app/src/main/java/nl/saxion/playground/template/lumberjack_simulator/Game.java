@@ -7,14 +7,12 @@ import java.util.Map;
 
 import nl.saxion.playground.template.lib.Entity;
 import nl.saxion.playground.template.lib.GameModel;
+import nl.saxion.playground.template.lumberjack_simulator.activity.Activity;
 import nl.saxion.playground.template.lumberjack_simulator.entities.Background;
 import nl.saxion.playground.template.lumberjack_simulator.entities.CoinGenerator;
 import nl.saxion.playground.template.lumberjack_simulator.entities.Lumberjack;
 import nl.saxion.playground.template.lumberjack_simulator.entities.TreeGenerator;
 
-// teacher: This class has only default constructor which means game object can be created anywhere
-// in the app which is dangerous. gameActvitiy might remain null in this case leading
-// to nullpointer exception.
 public class Game extends GameModel {
 
     private int coinsEarned;
@@ -23,9 +21,8 @@ public class Game extends GameModel {
 
     private CoinGenerator coinGenerator;
 
-    private Background background;
     private Lumberjack lumberjack;
-    TreeGenerator treeGenerator;
+    private TreeGenerator treeGenerator;
 
     private Map<Entity, Boolean> treeChopped;
 
@@ -37,7 +34,7 @@ public class Game extends GameModel {
     public void start() {
         treeChopped = new HashMap<>();
 
-        background = new Background(this);
+        Background background = new Background(this);
         addEntity(background);
 
         treeGenerator = new TreeGenerator(this);
@@ -68,7 +65,7 @@ public class Game extends GameModel {
         treeChopped.put(entity, chopped);
     }
 
-    void setGameActivity(Activity activity) {
+    public void setGameActivity(Activity activity) {
         gameActivity = activity;
     }
 
@@ -76,10 +73,6 @@ public class Game extends GameModel {
         this.coinsEarned = coinsEarned - 1;
         updateTextView();
     }
-
-// Teacher: using object class and type checking is not the best wy to do it. Secondly, never use
-//  0 as object name since it is hard to distinguish it from o.
-
 
     public boolean ifTreeChopped(Entity entity) {
         try {

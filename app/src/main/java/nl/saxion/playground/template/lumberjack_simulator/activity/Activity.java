@@ -1,4 +1,4 @@
-package nl.saxion.playground.template.lumberjack_simulator;
+package nl.saxion.playground.template.lumberjack_simulator.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import nl.saxion.playground.template.R;
 import nl.saxion.playground.template.lib.GameView;
+import nl.saxion.playground.template.lumberjack_simulator.Game;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.JsonHandler;
 import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
-import nl.saxion.playground.template.lumberjack_simulator.settings.SettingActivity;
 import nl.saxion.playground.template.lumberjack_simulator.store.BuyView;
 
 public class Activity extends AppCompatActivity {
@@ -27,10 +27,9 @@ public class Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         jsonHandler = new JsonHandler(getApplicationContext());
-        // In this example, we don't require a Layout or any other Android Views than
-        // are custom GameCanvas.
-        setContentView(R.layout.activity_);
 
+        setContentView(R.layout.activity_);
+        //loading data from file
         jsonHandler = new JsonHandler(getApplicationContext());
         jsonHandler.loadConstants();
 

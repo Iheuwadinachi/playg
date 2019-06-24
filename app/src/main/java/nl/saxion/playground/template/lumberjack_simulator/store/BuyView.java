@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,8 +35,6 @@ public class BuyView extends RelativeLayout {
 
     private TextView buyNewCoin;
     private TextView buyNewAxe;
-    private TextView buyChainsaw;
-    private TextView buyFuel;
 
     private Game game;
 
@@ -73,8 +70,6 @@ public class BuyView extends RelativeLayout {
         //setting global variables
         buyNewCoin = findViewById(R.id.priceNewCoin);
         buyNewAxe = findViewById(R.id.priceNewAxe);
-        buyChainsaw = findViewById(R.id.priceChainsawAxe);
-        buyFuel = findViewById(R.id.priceFuel);
 
         prices = new Price[NUMBER_OF_UPDATES];
 
@@ -153,14 +148,6 @@ public class BuyView extends RelativeLayout {
                 case 1:
                     currentPrice = Integer.parseInt(buyNewAxe.getText().toString());
                     break;
-                case 2:{
-                    currentPrice = Integer.parseInt(buyChainsaw.getText().toString());
-                    break;
-                }
-                case 3:{
-                    currentPrice = Integer.parseInt(buyFuel.getText().toString());
-                    break;
-                }
             }
 
         } catch (NumberFormatException e) {}

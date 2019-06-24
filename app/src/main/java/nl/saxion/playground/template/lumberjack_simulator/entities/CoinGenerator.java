@@ -16,22 +16,21 @@ import nl.saxion.playground.template.lib.GameModel;
 import nl.saxion.playground.template.lib.GameView;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
+/**
+ * @author Mark Kravchuk
+ * Class, which maintains a List of coins
+ */
+
 public class CoinGenerator extends Entity {
 
     private Game game;
     private SoundEffects soundEffects;
 
     private int NUMBER_OF_COINS = 1;
-
     private int frameForCoin = 4;
-
     private int tickRate;
 
-    private final int PERIOD_BETWEEN_COLLECTING = 30;
-
     private List<CoinElement> coins;
-
-
 
     public CoinGenerator(Game game) {
         this.game = game;
@@ -42,6 +41,7 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void tick() {
+        //check if lumberjack chopped the tree
         if (game.ifTreeChopped(this)) {
             for (int i = 0; i < NUMBER_OF_COINS; i++) {
                 CoinElement element = new CoinElement();
@@ -78,15 +78,13 @@ public class CoinGenerator extends Entity {
 
     @Override
     public void handleTouch(GameModel.Touch touch, MotionEvent event) {
-        // teacher: One line if statmenets are not really recommended.
-
-        Log.i("extra_info", "Touched! X: " + touch.x + ", Y: " + touch.y);
-
+        //here if statement checks if user pressed on any of coins
         if(event.getAction() == MotionEvent.ACTION_MOVE) {
             for (int i = coins.size() - 1; i > -1; i--) {
-                // teacher: Can you simplify the conditions inside if.
-                if (touch.x > coins.get(i).getPosition().x && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
-                        && touch.y > coins.get(i).getPosition().y && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
+                if (touch.x > coins.get(i).getPosition().x
+                        && touch.x < coins.get(i).getPosition().x + CoinElement.WIDTH
+                        && touch.y > coins.get(i).getPosition().y
+                        && touch.y < coins.get(i).getPosition().y + CoinElement.HEIGHT) {
                     Log.d("extra_info", "Silver removed");
                     soundEffects.playCoinSound();
                     coins.remove(i);

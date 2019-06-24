@@ -15,9 +15,12 @@ import nl.saxion.playground.template.lumberjack_simulator.local_lib.GlobalApplic
 import nl.saxion.playground.template.lumberjack_simulator.local_lib.Vector;
 import nl.saxion.playground.template.lumberjack_simulator.sound_lib.SoundEffects;
 
+/**
+ * @author Mark Kravchuk
+ * Main character class
+ */
 
 public class Lumberjack extends Entity {
-
 
     private Context context;
     private SoundEffects soundEffects;
@@ -51,7 +54,6 @@ public class Lumberjack extends Entity {
     private float top;
 
     private boolean playedAlready;
-    private boolean dayTheme = true;
 
     public Lumberjack(Game game) {
         this.game = game;
@@ -62,6 +64,7 @@ public class Lumberjack extends Entity {
         left = 0.6f * game.getWidth();
         //top margin
         top = TreeGenerator.TREE_Y_AXIS_FINISH + 5f;
+
         leftTouchesToDestroy = touchesToDestroy;
 
         //touch zones top left & bottom right
@@ -79,6 +82,7 @@ public class Lumberjack extends Entity {
     @Override
     public void tick() {
         if (touched) {
+            //here we choose which frame to show
             int chooser = tickRate - lastTouched;
             if (chooser < TIME_TO_DO_ALL_ANIMATION * 0.2) {
                 frame = 0;
@@ -95,7 +99,8 @@ public class Lumberjack extends Entity {
                 }
             } else {
                 leftTouchesToDestroy--;
-                if (leftTouchesToDestroy < 0) { //remake it
+                if (leftTouchesToDestroy < 0) {
+                    //Give for another entities that lumberjack chopped a block
                     game.setTreeChopped(true);
                     leftTouchesToDestroy = touchesToDestroy; //assign number of chops back(10,7,5,3)
                 }
@@ -142,18 +147,9 @@ public class Lumberjack extends Entity {
 
         //check if bitmap is not null
         if (!instantiated) {
-            if (dayTheme) {
                 bitmap = instantiatePictures(gv);
                 instantiated = true;
-            } else {
-//                bitmap[0][0] = gv.getBitmapFromResource(R.drawable.timberman_test);
-//                bitmap[1][0] = gv.getBitmapFromResource(R.drawable.timberman1_test);
-//                bitmap[2][0] = gv.getBitmapFromResource(R.drawable.timberman2_test);
-//                bitmap[3][0] = gv.getBitmapFromResource(R.drawable.timberman3_test);
-                instantiated = true;
-            }
         }
-
 
         //because our timber images have different size,
         //we try to make them look same
@@ -163,7 +159,7 @@ public class Lumberjack extends Entity {
 
         float extraLeft = left - 18f;
 
-        gv = showBitmap(gv,extraLeft,extraWidth);
+        showBitmap(gv,extraLeft,extraWidth);
     }
 
     public void displayNewAxe(){
@@ -196,13 +192,7 @@ public class Lumberjack extends Entity {
 
     }
 
-    void setAnotherTheme()  {
-        if(dayTheme) dayTheme = false;
-        else dayTheme = true;
-    }
-
-
-    private GameView showBitmap(GameView gv, float extraLeft,float extraWidth){
+    private void showBitmap(GameView gv, float extraLeft,float extraWidth){
         switch (frame) {
             case 0:
                 gv.drawBitmap(bitmap[0][indexCurrentAxe], left, top, width, height, 0);
@@ -217,7 +207,6 @@ public class Lumberjack extends Entity {
                 gv.drawBitmap(bitmap[3][indexCurrentAxe], extraLeft - 3f, top, extraWidth, height);
                 break;
         }
-        return gv;
     }
 
     private Bitmap[][] instantiatePictures(GameView gv) {
@@ -243,7 +232,9 @@ public class Lumberjack extends Entity {
         bitmap[1][2] = gv.getBitmapFromResource(R.drawable.timberman_gold1);
         bitmap[2][2] = gv.getBitmapFromResource(R.drawable.timberman_gold2);
         bitmap[3][2] = gv.getBitmapFromResource(R.drawable.timberman_gold3);
+
         //Finishing  with diamond axe with Lumberjack
+
         bitmap[0][3] = gv.getBitmapFromResource(R.drawable.timberman);
         bitmap[1][3] = gv.getBitmapFromResource(R.drawable.timberman_diamond1);
         bitmap[2][3] = gv.getBitmapFromResource(R.drawable.timberman_diamond2);
