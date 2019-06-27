@@ -6,12 +6,12 @@
     <application
         android:name=".lumberjack_simulator.local_lib.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/lumberjack_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/lumberjack_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".lumberjack_simulator.activity.SettingActivity"/>
         <activity android:name=".lumberjack_simulator.activity.Activity" />
         <activity android:name=".lumberjack_simulator.activity.IntroActivity">

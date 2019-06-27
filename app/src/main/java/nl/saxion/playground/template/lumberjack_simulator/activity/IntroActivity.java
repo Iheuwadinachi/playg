@@ -19,7 +19,6 @@ import nl.saxion.playground.template.lumberjack_simulator.sound_lib.MusicPlayer;
 public class IntroActivity extends AppCompatActivity {
 
     private JsonHandler jsonHandler;
-    private Game game;
 
     //public static MediaPlayer mMediaPlayer;
     private static MusicPlayer musicPlayer;
@@ -78,12 +77,10 @@ public class IntroActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     public void openActivity() {
         Intent intent = new Intent(this, Activity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }

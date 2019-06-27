@@ -14,7 +14,7 @@ import nl.saxion.playground.template.lumberjack_simulator.data_storage.Save;
 import nl.saxion.playground.template.lumberjack_simulator.store.BuyView;
 
 public class Activity extends AppCompatActivity {
-//teacher:
+
     private Game game;
     private GameView gameView;
     private TextView coinIndicator;
